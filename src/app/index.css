@@ -1,0 +1,154 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 80px;
+        /* offset for floating navbar */
+    }
+
+    body {
+        @apply bg-surface text-text-primary font-sans;
+    }
+}
+
+@layer utilities {
+    .animate-draw-path {
+        stroke-dasharray: 1000;
+        stroke-dashoffset: 1000;
+    }
+
+    /* Dynamic Grid Background */
+    .bg-grid-pattern {
+        background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+        background-size: 50px 50px;
+        mask-image: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 50%);
+        -webkit-mask-image: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 50%);
+    }
+
+    /* 3D Flip Card Utilities */
+    .perspective-1000 {
+        perspective: 1000px;
+    }
+
+    .transform-style-3d {
+        transform-style: preserve-3d;
+    }
+
+    .backface-hidden {
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+    }
+
+    .rotate-y-180 {
+        transform: rotateY(180deg);
+    }
+}
+
+@layer components {
+
+    /* Glassmorphism Premium moved to components layer for @apply compatibility */
+    .glass-panel {
+        @apply bg-surface-lighter/60 backdrop-blur-md border border-white/10;
+    }
+
+    .glass-button {
+        @apply relative overflow-hidden bg-surface-lighter/60 backdrop-blur-md border border-white/10 hover:border-primary/50 transition-all duration-300;
+    }
+
+    .glass-button::before {
+        content: '';
+        @apply absolute inset-0 opacity-0 transition-opacity duration-300 bg-gradient-to-r from-primary/10 to-transparent pointer-events-none;
+    }
+
+    .glass-button:hover::before {
+        @apply opacity-100;
+    }
+
+    /* Cinematic text shadow for legibility over video (mobile) */
+    .text-shadow-cinematic {
+        text-shadow: 0 2px 20px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Checkout Flow Diagram – animated particle traveling the timeline */
+    .checkout-flow-particle {
+        position: absolute;
+        top: -8px;
+        left: -2px;
+        width: 5px;
+        height: 16px;
+        border-radius: 9999px;
+        background: linear-gradient(to bottom, transparent, rgba(99, 220, 255, 0.8), transparent);
+        animation: flow-travel 3.5s ease-in-out infinite;
+    }
+
+    @keyframes flow-travel {
+        0% {
+            top: -16px;
+            opacity: 0;
+        }
+
+        5% {
+            opacity: 1;
+        }
+
+        90% {
+            opacity: 1;
+        }
+
+        100% {
+            top: 100%;
+            opacity: 0;
+        }
+    }
+
+    /* Study card flip animations (half-flip technique) */
+    .study-flip-out {
+        animation: studyFlipOut 0.35s ease-in forwards;
+    }
+
+    .study-flip-in {
+        animation: studyFlipIn 0.35s ease-out forwards;
+    }
+
+    @keyframes studyFlipOut {
+        0% {
+            transform: rotateY(0deg);
+            opacity: 1;
+        }
+
+        100% {
+            transform: rotateY(90deg);
+            opacity: 0;
+        }
+    }
+
+    @keyframes studyFlipIn {
+        0% {
+            transform: rotateY(-90deg);
+            opacity: 0;
+        }
+
+        100% {
+            transform: rotateY(0deg);
+            opacity: 1;
+        }
+    }
+
+    /* Thin scrollbar for flow container */
+    .checkout-flow-container::-webkit-scrollbar {
+        width: 3px;
+    }
+
+    .checkout-flow-container::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .checkout-flow-container::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+    }
+}
