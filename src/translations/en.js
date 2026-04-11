@@ -35,7 +35,7 @@ const en = {
     'education.title': 'Education',
     'stack.title': 'Tech Stack',
     'contact.title': 'Start a new project?',
-    'contact.subtitle': 'Available for Software Engineering or Full Stack Development roles. Let\'s build solid solutions together.',
+    'contact.subtitle': 'Available for Full Stack Developer or Systems Analyst roles. Let\'s build solid solutions together.',
     'contact.cta': 'Contact',
     'contact.cv': 'Download CV',
     'contact.cv.modal.title': 'Select a version',

@@ -1,4 +1,5 @@
 import React, { Suspense, lazy } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { LanguageProvider } from '@/core/context/LanguageContext';
 import ErrorBoundary from '@/core/ui/ErrorBoundary';
 import Hero from '@/features/hero/components/Hero';
@@ -29,6 +30,7 @@ function App() {
                     </main>
                     <Footer />
                 </div>
+                <Analytics />
             </LanguageProvider>
         </ErrorBoundary>
     );

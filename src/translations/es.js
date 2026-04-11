@@ -35,7 +35,7 @@ const es = {
     'education.title': 'Formación Académica',
     'stack.title': 'Stack Técnico',
     'contact.title': '¿Iniciamos un nuevo proyecto?',
-    'contact.subtitle': 'Disponible para roles de Ingeniería de Software o Desarrollo Full Stack. Construyamos soluciones sólidas juntos.',
+    'contact.subtitle': 'Disponible para roles de Desarrollador Full Stack o Analista de Sistemas. Construyamos soluciones sólidas juntos.',
     'contact.cta': 'Contactar',
     'contact.cv': 'Descargar CV',
     'contact.cv.modal.title': 'Selecciona una versión',
