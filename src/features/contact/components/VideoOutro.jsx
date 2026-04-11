@@ -29,12 +29,13 @@ const VideoOutro = () => {
     }, [hasPlayed]);
 
     return (
-        <section className="relative w-full h-[80vh] min-h-[500px] bg-black flex flex-col items-center justify-center overflow-hidden border-t border-text-secondary/10 shrink-0">
+        <section className="relative w-full h-[50vh] md:h-[80vh] min-h-[300px] md:min-h-[500px] bg-black flex flex-col items-center justify-center overflow-hidden border-t border-text-secondary/10 shrink-0">
             {/* Video container */}
             <video
                 ref={videoRef}
                 src="/outro.mp4"
                 className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-[2000ms] ${hasPlayed ? 'opacity-80' : 'opacity-0'}`}
+                style={{ objectPosition: 'center 40%' }}
                 muted
                 playsInline
                 disablePictureInPicture

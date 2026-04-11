@@ -6,16 +6,16 @@ const easeInOutCubic = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2,
 
 /**
  * @typedef {Object} UseVideoScrubOptions
- * @property {React.RefObject<HTMLVideoElement>} videoRef - Referencia al nodo de DOM del video.
- * @property {import("framer-motion").MotionValue<number>} scrollYProgress - Valor animado provisto por useScroll de framer.
- * @property {number} autoplayDurationMs - Duración en miliSegundos de la extrapolación pasiva inicial.
- * @property {number} autoplayProgressEnd - Máximo porcentaje límite del video reservado para autoplay (ej. 0.35 para 35%).
+ * @property {React.RefObject<HTMLVideoElement>} videoRef - Ref to the video DOM node.
+ * @property {import("framer-motion").MotionValue<number>} scrollYProgress - Animated value provided by Framer's useScroll.
+ * @property {number} autoplayDurationMs - Duration in milliseconds of the initial passive extrapolation.
+ * @property {number} autoplayProgressEnd - Maximum percentage of the video reserved for autoplay (e.g., 0.35 for 35%).
  */
 
 /**
- * Custom Hook que delega la inicialización, chequeo de error y el scrubbing de tiempo del DOM al HeroVideoLayer,
- * garantizando la responsabilidad única en el ciclo de Render React.
- * @param {UseVideoScrubOptions} options Objeto de configuración de hook matemático.
+ * Custom Hook that delegates initialization, error checking, and time scrubbing
+ * to the HeroVideoLayer, ensuring single responsibility within the React render cycle.
+ * @param {UseVideoScrubOptions} options Hook configuration object.
  * @returns {{ videoReady: boolean, hasError: boolean, autoplayDone: boolean, setAutoplayDone: Function }}
  */
 export const useVideoScrub = ({
@@ -28,8 +28,9 @@ export const useVideoScrub = ({
     const [hasError, setHasError] = useState(false);
     const [autoplayDone, setAutoplayDone] = useState(false);
     const videoDuration = useRef(0);
+    const targetTime = useRef(0);
+    const rafId = useRef(null);
 
-    // ─── Preload Video Metadata ─────────────────────────
     useEffect(() => {
         const video = videoRef.current;
         if (!video) return;
@@ -42,7 +43,7 @@ export const useVideoScrub = ({
         };
 
         const handleError = () => {
-            console.error("Error cargando la secuencia de video");
+            console.error("Error loading video sequence");
             setHasError(true);
         };
 
@@ -67,9 +68,9 @@ export const useVideoScrub = ({
         if (!videoReady || hasError || autoplayDone || !videoRef.current) return;
 
         let startTime = null;
-        let rafId = null;
+        let animRafId = null;
         const totalDuration = videoDuration.current;
-        const targetTime = totalDuration * autoplayProgressEnd;
+        const autoplayTarget = totalDuration * autoplayProgressEnd;
 
         const animate = (timestamp) => {
             if (!startTime) startTime = timestamp;
@@ -78,37 +79,71 @@ export const useVideoScrub = ({
             const easedProgress = easeInOutCubic(progress);
 
             if (videoRef.current) {
-                videoRef.current.currentTime = easedProgress * targetTime;
+                videoRef.current.currentTime = easedProgress * autoplayTarget;
             }
 
             if (progress < 1) {
-                rafId = requestAnimationFrame(animate);
+                animRafId = requestAnimationFrame(animate);
             } else {
+                targetTime.current = autoplayTarget; // Hand over cleanly to scroll engine
                 setAutoplayDone(true);
             }
         };
 
         const timeout = setTimeout(() => {
-            rafId = requestAnimationFrame(animate);
+            animRafId = requestAnimationFrame(animate);
         }, 100);
 
         return () => {
             clearTimeout(timeout);
-            if (rafId) cancelAnimationFrame(rafId);
+            if (animRafId) cancelAnimationFrame(animRafId);
         };
     }, [videoReady, hasError, autoplayDone, videoRef, autoplayDurationMs, autoplayProgressEnd]);
 
-    // ─── PHASE 2: Scroll-Scrub Engine ───────────────────
-    useMotionValueEvent(scrollYProgress, "change", (latest) => {
-        if (!autoplayDone || !videoRef.current || !videoReady) return;
+    useEffect(() => {
+        if (!autoplayDone || !videoReady) return;
 
-        // Mapeo del scroll actual (0-1) al fragmento restante del video
+        const LERP_FACTOR = 0.12;
+        let lastMobileUpdate = 0;
+
+        const tick = (timestamp) => {
+            const video = videoRef.current;
+            if (video) {
+                const current = video.currentTime;
+                const target = targetTime.current;
+                const diff = target - current;
+
+                if (Math.abs(diff) > 0.01) {
+                    const isMobile = window.innerWidth <= 768;
+
+                    if (isMobile) {
+                        if (timestamp - lastMobileUpdate > 66) {
+                            video.currentTime = target;
+                            lastMobileUpdate = timestamp;
+                        }
+                    } else {
+                        video.currentTime = current + diff * LERP_FACTOR;
+                    }
+                }
+            }
+            rafId.current = requestAnimationFrame(tick);
+        };
+
+        rafId.current = requestAnimationFrame(tick);
+
+        return () => {
+            if (rafId.current) cancelAnimationFrame(rafId.current);
+        };
+    }, [autoplayDone, videoReady, videoRef]);
+
+    useMotionValueEvent(scrollYProgress, "change", (latest) => {
+        if (!autoplayDone || !videoReady) return;
+
         const total = videoDuration.current;
         const start = total * autoplayProgressEnd;
         const scrollableDuration = total - start;
-        const time = start + latest * scrollableDuration;
 
-        videoRef.current.currentTime = time;
+        targetTime.current = start + latest * scrollableDuration;
     });
 
     return { videoReady, hasError, autoplayDone, setAutoplayDone };

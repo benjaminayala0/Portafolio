@@ -31,19 +31,19 @@ export default async function handler(req, res) {
         // Brevo requires the sender to be an email authenticated on your Brevo account
         // Assuming your Brevo account uses the same CONNECT_EMAIL you provide.
         const payload = {
-            sender: { 
-                name: "Portafolio Web (No-Reply)", 
-                email: CONTACT_EMAIL 
+            sender: {
+                name: "Portafolio Web (No-Reply)",
+                email: CONTACT_EMAIL
             },
             to: [
-                { 
-                    name: "Benjamín Ayala", 
-                    email: CONTACT_EMAIL 
+                {
+                    name: "Benjamín Ayala",
+                    email: CONTACT_EMAIL
                 }
             ],
-            replyTo: { 
-                name: name, 
-                email: email 
+            replyTo: {
+                name: name,
+                email: email
             },
             subject: `💡 Nuevo contacto de: ${name} (Portafolio)`,
             htmlContent: `
@@ -76,7 +76,7 @@ export default async function handler(req, res) {
         }
 
         return res.status(200).json({ success: true, message: 'Correo enviado correctamente' });
-        
+
     } catch (error) {
         console.error("Excepción backend:", error);
         return res.status(500).json({ error: 'Error interno del servidor.' });

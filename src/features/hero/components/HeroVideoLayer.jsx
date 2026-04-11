@@ -20,7 +20,7 @@ export const HeroVideoLayer = ({ videoRef, videoSrc, canvasOpacity, hasError }) 
             {hasError ? (
                 <div className="absolute inset-0 flex items-center justify-center">
                     <div className="text-text-secondary/50 font-mono text-center max-w-sm px-6">
-                        [DEV]: Error o límite de GPU. Video no disponible en {videoSrc}
+                        [DEV]: GPU error or limit reached. Video unavailable at {videoSrc}
                     </div>
                 </div>
             ) : (
@@ -36,7 +36,7 @@ export const HeroVideoLayer = ({ videoRef, videoSrc, canvasOpacity, hasError }) 
             )}
 
             <div className="hidden md:block absolute inset-y-0 right-0 w-48 bg-gradient-to-l from-surface to-transparent pointer-events-none" />
-            <div className="md:hidden absolute inset-0 bg-gradient-to-t from-surface via-surface/80 to-surface/20 pointer-events-none" />
+            <div className="md:hidden absolute inset-0 bg-gradient-to-t from-surface via-surface/50 to-transparent pointer-events-none" />
 
             <div
                 className="absolute inset-0 pointer-events-none"

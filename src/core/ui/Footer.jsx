@@ -16,6 +16,7 @@ const Footer = () => {
         { labelKey: 'footer.nav.home', hash: '#top' },
         { labelKey: 'footer.nav.proposal', hash: '#methodology' },
         { labelKey: 'footer.nav.studies', hash: '#studies' },
+        { labelKey: 'footer.nav.experience', hash: '#experience-contact' },
         { labelKey: 'footer.nav.contact', hash: '#experience-contact' },
     ];
 
@@ -43,9 +44,9 @@ const Footer = () => {
                             <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noreferrer" className="p-2 rounded-lg border border-text-secondary/10 text-text-secondary hover:text-white hover:border-primary/30 hover:bg-primary/5 transition-all" aria-label="LinkedIn">
                                 <Linkedin size={16} />
                             </a>
-                            <button onClick={() => window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${CONTACT_INFO.email}&su=${encodeURIComponent(CONTACT_INFO.subject)}`, '_blank')} className="p-2 rounded-lg border border-text-secondary/10 text-text-secondary hover:text-white hover:border-primary/30 hover:bg-primary/5 transition-all" aria-label="Email">
+                            <a href={`https://mail.google.com/mail/?view=cm&fs=1&to=${CONTACT_INFO.email}&su=${encodeURIComponent(CONTACT_INFO.subject)}`} target="_blank" rel="noreferrer" className="p-2 rounded-lg border border-text-secondary/10 text-text-secondary hover:text-white hover:border-primary/30 hover:bg-primary/5 transition-all" aria-label="Email">
                                 <Mail size={16} />
-                            </button>
+                            </a>
                         </div>
                     </div>
 

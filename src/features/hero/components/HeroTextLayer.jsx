@@ -38,7 +38,7 @@ export const HeroTextLayer = ({ textVisible, textOpacity, isInteractive }) => {
 
     return (
         <motion.div
-            className="relative z-10 h-full flex items-center px-4 sm:px-6 md:px-0 justify-center md:justify-end"
+            className="relative z-10 h-full flex items-start pt-8 md:pt-0 md:items-center px-4 sm:px-6 md:px-0 justify-center md:justify-end"
             style={{
                 opacity: textOpacity,
                 pointerEvents: isInteractive ? 'auto' : 'none'
@@ -62,7 +62,7 @@ export const HeroTextLayer = ({ textVisible, textOpacity, isInteractive }) => {
                     </span>
                 </motion.h1>
 
-                <motion.p variants={itemVariants} className="text-xs sm:text-sm md:text-base lg:text-lg text-text-secondary max-w-xl mb-4 md:mb-6 leading-relaxed font-mono">
+                <motion.p variants={itemVariants} className="text-xs sm:text-sm md:text-base lg:text-lg text-text-secondary max-w-xl mb-4 md:mb-6 leading-relaxed font-mono" style={{ textShadow: '0 0 3px rgba(13,17,23,1), 0 0 6px rgba(13,17,23,0.8)' }}>
                     {subtitleDecrypt.displayText}
                 </motion.p>
 
@@ -75,7 +75,7 @@ export const HeroTextLayer = ({ textVisible, textOpacity, isInteractive }) => {
                         {t('hero.cta.studies')}
                     </a>
                     <a
-                        href="#experience-contact"
+                        href="#contact"
                         aria-label={t('hero.cta.contact')}
                         className="w-full sm:w-auto text-center glass-button px-5 md:px-7 py-2.5 md:py-3 rounded-lg font-medium text-text-primary text-sm md:text-base flex items-center justify-center gap-2 cursor-pointer"
                     >

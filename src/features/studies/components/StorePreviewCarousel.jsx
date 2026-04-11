@@ -52,14 +52,14 @@ const StorePreviewCarousel = ({ screenshots = [], isMobile = false }) => {
                         <button
                             onClick={(e) => { e.stopPropagation(); prev(); }}
                             className="absolute left-2 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-surface/70 backdrop-blur-sm border border-text-secondary/20 text-text-primary/80 hover:text-text-primary hover:bg-surface/90 transition-all z-20"
-                            aria-label="Captura anterior"
+                            aria-label="Previous screenshot"
                         >
                             <ChevronLeft size={14} />
                         </button>
                         <button
                             onClick={(e) => { e.stopPropagation(); next(); }}
                             className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-surface/70 backdrop-blur-sm border border-text-secondary/20 text-text-primary/80 hover:text-text-primary hover:bg-surface/90 transition-all z-20"
-                            aria-label="Captura siguiente"
+                            aria-label="Next screenshot"
                         >
                             <ChevronRight size={14} />
                         </button>
