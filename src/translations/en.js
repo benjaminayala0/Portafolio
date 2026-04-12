@@ -100,7 +100,7 @@ const en = {
     'Feb. 2023 – Dic. 2027 (Esp.)': 'Feb. 2023 – Dec. 2027 (Expected)',
 
     'Analista de Sistemas': 'Systems Analyst',
-    'UADER': 'UADER (Universidad Autónoma de Entre Ríos)',
+    'UADER': 'UADER',
     'Titulación Dic. 2025': 'Degree Dec. 2025',
 
     // Tech Stack

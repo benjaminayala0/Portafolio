@@ -26,21 +26,18 @@ const StorePreviewCarousel = ({ screenshots = [], isMobile = false }) => {
     return (
         <div className={`h-full flex flex-col ${isMobile ? 'items-center w-full' : 'w-full'}`}>
             {/* Image area */}
-            <div className={`relative flex items-center justify-center shrink-0 ${
-                isMobile 
-                    ? 'w-full h-[400px] sm:h-[450px] bg-transparent py-4 overflow-hidden' 
-                    : 'w-full aspect-video min-h-[250px] bg-surface rounded-t-xl overflow-hidden'
-            }`}>
+            <div className={`relative flex items-center justify-center shrink-0 ${isMobile
+                ? 'w-full h-[400px] sm:h-[450px] bg-transparent py-4 overflow-hidden'
+                : 'w-full aspect-video min-h-[250px] bg-surface rounded-t-xl overflow-hidden'
+                }`}>
                 {screenshots.map((shot, i) => (
                     <img
                         key={i}
                         src={shot.src}
                         alt={shot.alt}
-                        className={`absolute w-full h-full transition-opacity duration-500 ease-in-out ${
-                            isMobile ? 'object-contain object-center scale-[0.98]' : 'inset-0 object-cover'
-                        } ${
-                            i === current ? 'opacity-100 z-10' : 'opacity-0 z-0'
-                        }`}
+                        className={`absolute w-full h-full transition-opacity duration-500 ease-in-out ${isMobile ? 'object-contain object-center scale-[0.98]' : 'inset-0 object-cover'
+                            } ${i === current ? 'opacity-100 z-10' : 'opacity-0 z-0'
+                            }`}
                         loading="lazy"
                         draggable={false}
                     />
@@ -52,14 +49,14 @@ const StorePreviewCarousel = ({ screenshots = [], isMobile = false }) => {
                         <button
                             onClick={(e) => { e.stopPropagation(); prev(); }}
                             className="absolute left-2 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-surface/70 backdrop-blur-sm border border-text-secondary/20 text-text-primary/80 hover:text-text-primary hover:bg-surface/90 transition-all z-20"
-                            aria-label="Previous screenshot"
+                            aria-label="Captura anterior"
                         >
                             <ChevronLeft size={14} />
                         </button>
                         <button
                             onClick={(e) => { e.stopPropagation(); next(); }}
                             className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 rounded-full bg-surface/70 backdrop-blur-sm border border-text-secondary/20 text-text-primary/80 hover:text-text-primary hover:bg-surface/90 transition-all z-20"
-                            aria-label="Next screenshot"
+                            aria-label="Captura siguiente"
                         >
                             <ChevronRight size={14} />
                         </button>
@@ -68,8 +65,8 @@ const StorePreviewCarousel = ({ screenshots = [], isMobile = false }) => {
             </div>
 
             {/* Caption + dot navigation */}
-            <div className="px-4 py-2.5 flex items-center justify-between bg-surface-lighter/50 border-t border-text-secondary/10">
-                <span className="text-[11px] text-text-secondary font-mono truncate mr-3">
+            <div className="px-4 py-2.5 flex flex-col sm:flex-row items-center sm:justify-between gap-1.5 sm:gap-0 bg-surface-lighter/50 border-t border-text-secondary/10">
+                <span className="text-[11px] text-text-secondary font-mono sm:truncate sm:mr-3 text-center sm:text-left leading-relaxed">
                     {t(screenshots[current]?.alt)}
                 </span>
                 {screenshots.length > 1 && (
@@ -78,11 +75,10 @@ const StorePreviewCarousel = ({ screenshots = [], isMobile = false }) => {
                             <button
                                 key={i}
                                 onClick={() => setCurrent(i)}
-                                className={`rounded-full transition-all duration-300 ${
-                                    i === current
-                                        ? 'w-4 h-1.5 bg-primary'
-                                        : 'w-1.5 h-1.5 bg-text-secondary/30 hover:bg-text-secondary/60'
-                                }`}
+                                className={`rounded-full transition-all duration-300 ${i === current
+                                    ? 'w-4 h-1.5 bg-primary'
+                                    : 'w-1.5 h-1.5 bg-text-secondary/30 hover:bg-text-secondary/60'
+                                    }`}
                                 aria-label={`Ir a captura ${i + 1}`}
                             />
                         ))}

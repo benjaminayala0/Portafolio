@@ -29,7 +29,7 @@ const VideoOutro = () => {
     }, [hasPlayed]);
 
     return (
-        <section className="relative w-full h-[50vh] md:h-[80vh] min-h-[300px] md:min-h-[500px] bg-black flex flex-col items-center justify-center overflow-hidden border-t border-text-secondary/10 shrink-0">
+        <section className="relative w-full h-[50svh] md:h-[80svh] min-h-[300px] md:min-h-[500px] bg-black flex flex-col items-center justify-center overflow-hidden border-t border-text-secondary/10 shrink-0">
             {/* Video container */}
             <video
                 ref={videoRef}

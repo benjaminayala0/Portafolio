@@ -64,8 +64,8 @@ const Hero = () => {
     const showCanvas = isMobile && autoplayDone && framesReady;
 
     return (
-        <section ref={containerRef} className="relative w-full h-[200dvh] md:h-[350dvh] bg-surface">
-            <div className="sticky top-0 h-[100dvh] w-full overflow-hidden">
+        <section ref={containerRef} className="relative w-full h-[200svh] md:h-[350svh] bg-surface">
+            <div className="sticky top-0 h-[100svh] w-full overflow-hidden">
 
                 <HeroVideoLayer
                     videoRef={videoRef}

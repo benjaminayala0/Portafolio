@@ -55,7 +55,7 @@ const ExperienceAndContact = () => {
                             {EDUCATION.map((edu) => (
                                 <div key={edu.id} className="relative">
                                     <div className={`absolute -left-[41px] bg-surface p-1 rounded-full border ${edu.isCurrent ? 'border-[#8b5cf6]' : 'border-text-secondary/50'}`}>
-                                        <div className={`w-2 h-2 rounded-full ${edu.isCurrent ? 'bg-[#8b5cf6]' : 'bg-text-secondary/50'}`} />
+                                        <div className={`w-2 h-2 rounded-full ${edu.isCurrent ? 'bg-[#8b5cf6] animate-pulse' : 'bg-text-secondary/50'}`} />
                                     </div>
                                     <div className="text-sm font-mono text-text-secondary mb-1">{t(edu.period)}</div>
                                     <h4 className={`text-lg font-bold text-text-primary ${!edu.isCurrent ? 'text-opacity-80' : ''}`}>{t(edu.title)}</h4>

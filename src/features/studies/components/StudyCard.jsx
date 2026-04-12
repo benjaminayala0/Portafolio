@@ -56,7 +56,7 @@ const StudiesSection = () => {
         }, FLIP_HALF_MS);
     }, [activeViews]);
 
-    // Auto-advance every 5 seconds (gated by toggle)
+    // Auto-advance with preview-aware timing
     useEffect(() => {
         Object.values(timersRef.current).forEach(clearInterval);
         timersRef.current = {};
@@ -66,6 +66,12 @@ const StudiesSection = () => {
         CASE_STUDIES.forEach(study => {
             if (!study.views || study.views.length <= 1) return;
 
+            const currentViewId = activeViews[study.id] || 'architecture';
+            const isPreview = currentViewId === 'preview';
+            const screenshotCount = study.screenshots?.length || 1;
+            // Give preview enough time to cycle all screenshots
+            const delay = isPreview ? AUTO_ADVANCE_MS * screenshotCount : AUTO_ADVANCE_MS;
+
             timersRef.current[study.id] = setInterval(() => {
                 if (pausedRef.current[study.id]) return;
                 if (flippingRef.current[study.id]) return;
@@ -74,7 +80,7 @@ const StudiesSection = () => {
                 const currentIdx = study.views.findIndex(v => v.id === current);
                 const nextIdx = (currentIdx + 1) % study.views.length;
                 triggerFlip(study.id, study.views[nextIdx].id);
-            }, AUTO_ADVANCE_MS);
+            }, delay);
         });
 
         return () => Object.values(timersRef.current).forEach(clearInterval);
@@ -106,7 +112,7 @@ const StudiesSection = () => {
                             : 'border-text-secondary/15 bg-surface-lighter/30 text-text-secondary hover:border-text-secondary/30'
                         }
                     `}
-                    aria-label={autoAdvance ? 'Pausar auto-avance de tarjetas' : 'Activar auto-avance de tarjetas'}
+                    aria-label={autoAdvance ? 'Pause auto-advance' : 'Enable auto-advance'}
                 >
                     {autoAdvance ? (
                         <><Pause size={12} className="fill-current" /> Auto</>
@@ -211,7 +217,7 @@ const StudiesSection = () => {
                                             </div>
                                         )}
 
-                                        <div style={{ perspective: '1200px' }}>
+                                        <div style={{ perspective: '1200px' }} className="min-h-[480px] sm:min-h-[500px] lg:min-h-[550px] w-full flex flex-col justify-center">
                                             <div className={`transform-gpu ${
                                                 flipState === 'out' ? 'study-flip-out' :
                                                 flipState === 'in' ? 'study-flip-in' : ''

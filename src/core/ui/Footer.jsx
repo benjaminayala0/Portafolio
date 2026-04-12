@@ -17,7 +17,7 @@ const Footer = () => {
         { labelKey: 'footer.nav.proposal', hash: '#methodology' },
         { labelKey: 'footer.nav.studies', hash: '#studies' },
         { labelKey: 'footer.nav.experience', hash: '#experience-contact' },
-        { labelKey: 'footer.nav.contact', hash: '#experience-contact' },
+        { labelKey: 'footer.nav.contact', hash: '#contact' },
     ];
 
     return (
