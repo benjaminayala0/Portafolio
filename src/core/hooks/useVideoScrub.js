@@ -92,6 +92,8 @@ export const useVideoScrub = ({
 
             return () => {
                 video.removeEventListener('timeupdate', handleTimeUpdate);
+                video.pause();
+                video.playbackRate = 1.0;
             };
         }
 
@@ -161,7 +163,14 @@ export const useVideoScrub = ({
     }, [autoplayDone, videoReady, videoRef]);
 
     useMotionValueEvent(scrollYProgress, "change", (latest) => {
-        if (!autoplayDone || !videoReady) return;
+        if (!videoReady) return;
+
+        // If user starts scrolling manually before autoplay finishes, surrender control instantly
+        if (!autoplayDone && latest > 0.005) {
+            setAutoplayDone(true);
+        }
+
+        if (!autoplayDone) return;
 
         const total = videoDuration.current;
         const start = total * autoplayProgressEnd;

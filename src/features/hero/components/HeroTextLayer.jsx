@@ -38,7 +38,7 @@ export const HeroTextLayer = ({ textVisible, textOpacity, isInteractive }) => {
 
     return (
         <motion.div
-            className="relative z-10 h-full flex items-start pt-28 md:pt-0 md:items-center px-4 sm:px-6 md:px-0 justify-center md:justify-end"
+            className="relative z-10 h-full flex items-start pt-16 md:pt-0 md:items-center px-4 sm:px-6 md:px-0 justify-center md:justify-end"
             style={{
                 opacity: textOpacity,
                 pointerEvents: isInteractive ? 'auto' : 'none'
@@ -50,10 +50,10 @@ export const HeroTextLayer = ({ textVisible, textOpacity, isInteractive }) => {
                 initial="hidden"
                 animate={textVisible ? "visible" : "hidden"}
             >
-                <LanguageSwitcher variants={itemVariants} className="mb-3 md:mb-5" />
-                <AvailabilityBadge variants={itemVariants} className="mb-3 md:mb-5" />
+                <LanguageSwitcher variants={itemVariants} className="mb-2 md:mb-5" />
+                <AvailabilityBadge variants={itemVariants} className="mb-2 md:mb-5" />
 
-                <motion.h1 variants={itemVariants} className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold tracking-tight mb-3 md:mb-5 text-text-primary">
+                <motion.h1 variants={itemVariants} className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold tracking-tight mb-2 md:mb-5 text-text-primary">
                     <span className="block font-mono font-medium tracking-tight">
                         {titleLine1.displayText}
                     </span>
@@ -62,7 +62,7 @@ export const HeroTextLayer = ({ textVisible, textOpacity, isInteractive }) => {
                     </span>
                 </motion.h1>
 
-                <motion.p variants={itemVariants} className="text-xs sm:text-sm md:text-base lg:text-lg text-text-secondary max-w-xl mb-4 md:mb-6 leading-relaxed font-mono" style={{ textShadow: '0 0 3px rgba(13,17,23,1), 0 0 6px rgba(13,17,23,0.8)' }}>
+                <motion.p variants={itemVariants} className="text-xs sm:text-sm md:text-base lg:text-lg text-text-secondary max-w-xl mb-3 md:mb-6 leading-tight md:leading-relaxed font-mono" style={{ textShadow: '0 0 3px rgba(13,17,23,1), 0 0 6px rgba(13,17,23,0.8)' }}>
                     {subtitleDecrypt.displayText}
                 </motion.p>
 
@@ -70,20 +70,20 @@ export const HeroTextLayer = ({ textVisible, textOpacity, isInteractive }) => {
                     <a
                         href="#studies"
                         aria-label={t('hero.cta.studies')}
-                        className="w-full sm:w-auto text-center px-5 md:px-7 py-2.5 md:py-3 rounded-lg bg-primary hover:bg-primary-dark transition-colors font-medium text-white text-sm md:text-base shadow-[0_0_20px_rgba(59,130,246,0.5)] cursor-pointer"
+                        className="w-full sm:w-auto text-center px-5 md:px-7 py-2 md:py-3 rounded-lg bg-primary hover:bg-primary-dark transition-colors font-medium text-white text-sm md:text-base shadow-[0_0_20px_rgba(59,130,246,0.5)] cursor-pointer"
                     >
                         {t('hero.cta.studies')}
                     </a>
                     <a
                         href="#contact"
                         aria-label={t('hero.cta.contact')}
-                        className="w-full sm:w-auto text-center glass-button px-5 md:px-7 py-2.5 md:py-3 rounded-lg font-medium text-text-primary text-sm md:text-base flex items-center justify-center gap-2 cursor-pointer"
+                        className="w-full sm:w-auto text-center px-5 md:px-7 py-2 md:py-3 rounded-lg font-medium text-white text-sm md:text-base flex items-center justify-center gap-2 cursor-pointer bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
                     >
-                        <span className="relative z-10">{t('hero.cta.contact')}</span>
+                        {t('hero.cta.contact')}
                     </a>
                 </motion.div>
 
-                <motion.div variants={itemVariants} className="mt-6 pt-4 md:mt-10 md:pt-6 border-t border-text-secondary/10 flex flex-wrap justify-center md:justify-start gap-2 md:gap-3">
+                <motion.div variants={itemVariants} className="mt-4 pt-3 md:mt-10 md:pt-6 border-t border-text-secondary/10 flex flex-wrap justify-center md:justify-start gap-2 md:gap-3">
                     {['React', 'Node.js', 'PostgreSQL', 'TypeScript'].map((tech) => (
                         <span
                             key={tech}
