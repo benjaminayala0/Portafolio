@@ -63,14 +63,40 @@ export const useVideoScrub = ({
         };
     }, [videoRef]);
 
-    // ─── PHASE 1: Auto-play Engine ──────────────────────
     useEffect(() => {
         if (!videoReady || hasError || autoplayDone || !videoRef.current) return;
 
-        let startTime = null;
-        let animRafId = null;
+        const video = videoRef.current;
         const totalDuration = videoDuration.current;
         const autoplayTarget = totalDuration * autoplayProgressEnd;
+        const isMobile = window.innerWidth <= 768;
+
+        if (isMobile) {
+            video.playbackRate = 1.6;
+
+            const handleTimeUpdate = () => {
+                if (video.currentTime >= autoplayTarget) {
+                    video.pause();
+                    video.playbackRate = 1.0;
+                    targetTime.current = autoplayTarget;
+                    setAutoplayDone(true);
+                    video.removeEventListener('timeupdate', handleTimeUpdate);
+                }
+            };
+
+            video.addEventListener('timeupdate', handleTimeUpdate);
+            video.play().catch(() => {
+                targetTime.current = 0;
+                setAutoplayDone(true);
+            });
+
+            return () => {
+                video.removeEventListener('timeupdate', handleTimeUpdate);
+            };
+        }
+
+        let startTime = null;
+        let animRafId = null;
 
         const animate = (timestamp) => {
             if (!startTime) startTime = timestamp;
@@ -78,14 +104,12 @@ export const useVideoScrub = ({
             const progress = Math.min(elapsed / autoplayDurationMs, 1);
             const easedProgress = easeInOutCubic(progress);
 
-            if (videoRef.current) {
-                videoRef.current.currentTime = easedProgress * autoplayTarget;
-            }
+            video.currentTime = easedProgress * autoplayTarget;
 
             if (progress < 1) {
                 animRafId = requestAnimationFrame(animate);
             } else {
-                targetTime.current = autoplayTarget; // Hand over cleanly to scroll engine
+                targetTime.current = autoplayTarget;
                 setAutoplayDone(true);
             }
         };

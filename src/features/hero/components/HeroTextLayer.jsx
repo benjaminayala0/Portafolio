@@ -38,7 +38,7 @@ export const HeroTextLayer = ({ textVisible, textOpacity, isInteractive }) => {
 
     return (
         <motion.div
-            className="relative z-10 h-full flex items-start pt-8 md:pt-0 md:items-center px-4 sm:px-6 md:px-0 justify-center md:justify-end"
+            className="relative z-10 h-full flex items-start pt-28 md:pt-0 md:items-center px-4 sm:px-6 md:px-0 justify-center md:justify-end"
             style={{
                 opacity: textOpacity,
                 pointerEvents: isInteractive ? 'auto' : 'none'
