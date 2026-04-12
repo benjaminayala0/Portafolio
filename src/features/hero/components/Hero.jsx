@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
 import { useVideoScrub } from '@/core/hooks/useVideoScrub';
+import { useCanvasScrub } from '@/core/hooks/useCanvasScrub';
 import { HeroVideoLayer } from './HeroVideoLayer';
 import { HeroTextLayer } from './HeroTextLayer';
 
@@ -9,7 +10,17 @@ const VIDEO_SRC = '/assets/hero-sequence.mp4';
 const Hero = () => {
     const containerRef = useRef(null);
     const videoRef = useRef(null);
+    const canvasRef = useRef(null);
     const [textVisible, setTextVisible] = useState(false);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -22,6 +33,18 @@ const Hero = () => {
         autoplayDurationMs: 7000,
         autoplayProgressEnd: 0.35
     });
+
+    const { framesReady, drawFrameAtProgress } = useCanvasScrub({
+        canvasRef,
+        scrollYProgress,
+        enabled: isMobile && autoplayDone,
+    });
+
+    useEffect(() => {
+        if (isMobile && autoplayDone && framesReady) {
+            drawFrameAtProgress(0);
+        }
+    }, [isMobile, autoplayDone, framesReady, drawFrameAtProgress]);
 
     useEffect(() => {
         if (autoplayDone) {
@@ -38,15 +61,20 @@ const Hero = () => {
         setIsInteractive(latest <= 0.5);
     });
 
+    const showCanvas = isMobile && autoplayDone && framesReady;
+
     return (
-        <section ref={containerRef} className="relative w-full h-[350dvh] bg-surface">
+        <section ref={containerRef} className="relative w-full h-[200dvh] md:h-[350dvh] bg-surface">
             <div className="sticky top-0 h-[100dvh] w-full overflow-hidden">
 
                 <HeroVideoLayer
                     videoRef={videoRef}
+                    canvasRef={canvasRef}
                     videoSrc={VIDEO_SRC}
                     canvasOpacity={canvasOpacity}
                     hasError={hasError}
+                    isMobile={isMobile}
+                    showCanvas={showCanvas}
                 />
 
                 <HeroTextLayer

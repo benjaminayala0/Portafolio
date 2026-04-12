@@ -4,13 +4,24 @@ import { motion } from 'framer-motion';
 /**
  * @typedef {Object} HeroVideoLayerProps
  * @property {React.RefObject<HTMLVideoElement>} videoRef
+ * @property {React.RefObject<HTMLCanvasElement>} [canvasRef]
  * @property {string} videoSrc
  * @property {import("framer-motion").MotionValue<number>} canvasOpacity
  * @property {boolean} hasError
+ * @property {boolean} [isMobile]
+ * @property {boolean} [showCanvas] - When true, hides video and shows the canvas layer
  */
 
 /** @param {HeroVideoLayerProps} props */
-export const HeroVideoLayer = ({ videoRef, videoSrc, canvasOpacity, hasError }) => {
+export const HeroVideoLayer = ({ 
+    videoRef, 
+    canvasRef, 
+    videoSrc, 
+    canvasOpacity, 
+    hasError, 
+    isMobile = false, 
+    showCanvas = false 
+}) => {
     return (
         <motion.div
             className="absolute inset-y-0 left-0 w-full md:w-[50%] z-0 bg-surface"
@@ -24,15 +35,33 @@ export const HeroVideoLayer = ({ videoRef, videoSrc, canvasOpacity, hasError }) 
                     </div>
                 </div>
             ) : (
-                <video
-                    ref={videoRef}
-                    src={videoSrc}
-                    preload="auto"
-                    muted
-                    playsInline
-                    className="absolute inset-0 w-full h-full object-cover"
-                    style={{ objectPosition: 'center 80%' }} 
-                />
+                <>
+                    <video
+                        ref={videoRef}
+                        src={videoSrc}
+                        preload="auto"
+                        muted
+                        playsInline
+                        disablePictureInPicture
+                        className="absolute inset-0 w-full h-full object-cover"
+                        style={{ 
+                            objectPosition: 'center 80%', 
+                            willChange: 'transform',
+                            opacity: (isMobile && showCanvas) ? 0 : 1,
+                        }}
+                    />
+
+                    {isMobile && (
+                        <canvas
+                            ref={canvasRef}
+                            className="absolute inset-0 w-full h-full"
+                            style={{
+                                opacity: showCanvas ? 1 : 0,
+                                pointerEvents: 'none',
+                            }}
+                        />
+                    )}
+                </>
             )}
 
             <div className="hidden md:block absolute inset-y-0 right-0 w-48 bg-gradient-to-l from-surface to-transparent pointer-events-none" />

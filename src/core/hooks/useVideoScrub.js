@@ -12,12 +12,6 @@ const easeInOutCubic = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2,
  * @property {number} autoplayProgressEnd - Maximum percentage of the video reserved for autoplay (e.g., 0.35 for 35%).
  */
 
-/**
- * Custom Hook that delegates initialization, error checking, and time scrubbing
- * to the HeroVideoLayer, ensuring single responsibility within the React render cycle.
- * @param {UseVideoScrubOptions} options Hook configuration object.
- * @returns {{ videoReady: boolean, hasError: boolean, autoplayDone: boolean, setAutoplayDone: Function }}
- */
 export const useVideoScrub = ({
     videoRef,
     scrollYProgress,
@@ -29,15 +23,16 @@ export const useVideoScrub = ({
     const [autoplayDone, setAutoplayDone] = useState(false);
     const videoDuration = useRef(0);
     const targetTime = useRef(0);
-    const rafId = useRef(null);
+    const rafIdMobileAuto = useRef(null);
 
+    // Preload Video Metadata
     useEffect(() => {
         const video = videoRef.current;
         if (!video) return;
 
         const handleLoadedMetadata = () => {
             if (!videoDuration.current || videoDuration.current === 0) {
-                videoDuration.current = video.duration || 32.27; // Fallback
+                videoDuration.current = video.duration || 32.27;
                 setVideoReady(true);
             }
         };
@@ -53,7 +48,6 @@ export const useVideoScrub = ({
             video.addEventListener('loadedmetadata', handleLoadedMetadata);
             video.addEventListener('loadeddata', handleLoadedMetadata);
         }
-
         video.addEventListener('error', handleError);
 
         return () => {
@@ -63,6 +57,7 @@ export const useVideoScrub = ({
         };
     }, [videoRef]);
 
+    // Phase 1: Auto-play Engine
     useEffect(() => {
         if (!videoReady || hasError || autoplayDone || !videoRef.current) return;
 
@@ -74,26 +69,30 @@ export const useVideoScrub = ({
         if (isMobile) {
             video.playbackRate = 1.6;
 
-            const handleTimeUpdate = () => {
+            const pollTime = () => {
                 if (video.currentTime >= autoplayTarget) {
                     video.pause();
                     video.playbackRate = 1.0;
+                    video.currentTime = autoplayTarget;
                     targetTime.current = autoplayTarget;
                     setAutoplayDone(true);
-                    video.removeEventListener('timeupdate', handleTimeUpdate);
+                } else {
+                    rafIdMobileAuto.current = requestAnimationFrame(pollTime);
                 }
             };
 
-            video.addEventListener('timeupdate', handleTimeUpdate);
-            video.play().catch(() => {
-                targetTime.current = 0;
+            video.play().then(() => {
+                rafIdMobileAuto.current = requestAnimationFrame(pollTime);
+            }).catch(() => {
+                video.currentTime = autoplayTarget;
+                targetTime.current = autoplayTarget;
                 setAutoplayDone(true);
             });
 
             return () => {
-                video.removeEventListener('timeupdate', handleTimeUpdate);
                 video.pause();
                 video.playbackRate = 1.0;
+                if (rafIdMobileAuto.current) cancelAnimationFrame(rafIdMobileAuto.current);
             };
         }
 
@@ -111,6 +110,7 @@ export const useVideoScrub = ({
             if (progress < 1) {
                 animRafId = requestAnimationFrame(animate);
             } else {
+                video.currentTime = autoplayTarget;
                 targetTime.current = autoplayTarget;
                 setAutoplayDone(true);
             }
@@ -126,57 +126,30 @@ export const useVideoScrub = ({
         };
     }, [videoReady, hasError, autoplayDone, videoRef, autoplayDurationMs, autoplayProgressEnd]);
 
-    useEffect(() => {
-        if (!autoplayDone || !videoReady) return;
-
-        const LERP_FACTOR = 0.12;
-        let lastMobileUpdate = 0;
-
-        const tick = (timestamp) => {
-            const video = videoRef.current;
-            if (video) {
-                const current = video.currentTime;
-                const target = targetTime.current;
-                const diff = target - current;
-
-                if (Math.abs(diff) > 0.01) {
-                    const isMobile = window.innerWidth <= 768;
-
-                    if (isMobile) {
-                        if (timestamp - lastMobileUpdate > 66) {
-                            video.currentTime = target;
-                            lastMobileUpdate = timestamp;
-                        }
-                    } else {
-                        video.currentTime = current + diff * LERP_FACTOR;
-                    }
-                }
-            }
-            rafId.current = requestAnimationFrame(tick);
-        };
-
-        rafId.current = requestAnimationFrame(tick);
-
-        return () => {
-            if (rafId.current) cancelAnimationFrame(rafId.current);
-        };
-    }, [autoplayDone, videoReady, videoRef]);
+    // Phase 2: Scroll Scrub (Desktop only — mobile uses canvas)
+    const isMobileRef = useRef(window.innerWidth <= 768);
 
     useMotionValueEvent(scrollYProgress, "change", (latest) => {
         if (!videoReady) return;
 
-        // If user starts scrolling manually before autoplay finishes, surrender control instantly
         if (!autoplayDone && latest > 0.005) {
             setAutoplayDone(true);
         }
 
         if (!autoplayDone) return;
 
+        if (isMobileRef.current) return;
+
         const total = videoDuration.current;
         const start = total * autoplayProgressEnd;
         const scrollableDuration = total - start;
 
-        targetTime.current = start + latest * scrollableDuration;
+        const clampLatest = Math.min(Math.max(latest, 0), 0.999);
+        const newTarget = start + clampLatest * scrollableDuration;
+
+        if (videoRef.current) {
+            videoRef.current.currentTime = Math.min(newTarget, total - 0.01);
+        }
     });
 
     return { videoReady, hasError, autoplayDone, setAutoplayDone };
