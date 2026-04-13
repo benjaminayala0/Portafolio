@@ -1,5 +1,5 @@
 import React from 'react';
-import { Telescope, Code2, Target, ArrowRight, ShieldCheck, Zap } from 'lucide-react';
+import { Telescope, Code2, Target, RefreshCw, Network, Layers2 } from 'lucide-react';
 import { useScrollReveal } from '@/core/hooks/useScrollReveal';
 import { useTranslation } from '@/core/hooks/useTranslation';
 
@@ -47,7 +47,7 @@ const Methodology = () => {
                             {t('methodology.card1.desc')}
                         </p>
                         <div className="flex items-center gap-2 text-xs font-mono text-primary/80 mt-auto pt-6 border-t border-text-secondary/10 w-full justify-center">
-                            <ShieldCheck size={14} /> {t('methodology.card1.label')}
+                            <Network size={14} /> {t('methodology.card1.label')}
                         </div>
                     </div>
                 </div>
@@ -64,7 +64,7 @@ const Methodology = () => {
                             {t('methodology.card2.desc')}
                         </p>
                         <div className="flex items-center gap-2 text-xs font-mono text-fuchsia-400/80 mt-auto pt-6 border-t border-text-secondary/10 w-full justify-center">
-                            <Zap size={14} /> {t('methodology.card2.label')}
+                            <Layers2 size={14} /> {t('methodology.card2.label')}
                         </div>
                     </div>
                 </div>
@@ -81,7 +81,7 @@ const Methodology = () => {
                             {t('methodology.card3.desc')}
                         </p>
                         <div className="flex items-center gap-2 text-xs font-mono text-[#8b5cf6]/80 mt-auto pt-6 border-t border-text-secondary/10 w-full justify-center">
-                            <ArrowRight size={14} /> {t('methodology.card3.label')}
+                            <RefreshCw size={14} /> {t('methodology.card3.label')}
                         </div>
                     </div>
                 </div>

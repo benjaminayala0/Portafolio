@@ -22,7 +22,7 @@ const en = {
     'methodology.subtitle': "As a Systems Analyst, my goal is to understand what the user needs before opening the editor. I build Full-Stack software that's functional, maintainable, and focused on delivering real value.",
     'methodology.card1.title': '1. Understand before coding',
     'methodology.card1.desc': 'I focus on gathering requirements, modeling the database, and defining the initial structure to prevent future bottlenecks.',
-    'methodology.card1.label': 'Solid database design',
+    'methodology.card1.label': 'Architecture without technical debt',
     'methodology.card2.title': '2. Full-Stack Development',
     'methodology.card2.desc': "I handle both frontend and backend. Not because I want to do everything, but because understanding both layers allows me to make better decisions on each one.",
     'methodology.card2.label': 'Front & Back mastery',
@@ -40,9 +40,9 @@ const en = {
     'contact.cv': 'Download CV',
     'contact.cv.modal.title': 'Select a version',
     'contact.cv.es': 'CV en Español',
-    'contact.cv.es.sub': 'Download native version',
+    'contact.cv.es.sub': 'Download Spanish version',
     'contact.cv.en': 'Resume in English',
-    'contact.cv.en.sub': 'Download technical version',
+    'contact.cv.en.sub': 'Download English version',
 
     // Contact Modal
     'contact.modal.title': 'Contact',

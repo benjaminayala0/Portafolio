@@ -30,12 +30,12 @@ export const useScrollReveal = ({
         return () => observer.unobserve(el);
     }, [threshold, triggerOnce, rootMargin]);
 
-    // GPU-accelerated transition via will-change + CSS transform + blur
+    // GPU-accelerated transition via will-change + CSS transform (removed filter/blur for mobile 60fps)
     const revealClass = [
-        'transition-all duration-[900ms] ease-out will-change-[opacity,transform,filter]',
+        'transition-all duration-[900ms] ease-out will-change-[opacity,transform]',
         isVisible
-            ? 'opacity-100 blur-none translate-y-0'
-            : 'opacity-0 blur-sm translate-y-8',
+            ? 'opacity-100 translate-y-0'
+            : 'opacity-0 translate-y-8',
     ].join(' ');
 
     return { ref, revealClass, isVisible };

@@ -1,6 +1,6 @@
 const es = {
     // Hero
-    'hero.title.line1': 'Analista en Sistemas',
+    'hero.title.line1': 'Analista de Sistemas',
     'hero.title.line2': '& Desarrollador Full Stack.',
     'hero.subtitle': 'Mi trabajo no es solo escribir código, sino desarmar problemas complejos. Entiendo el negocio, diseño la solución y la llevo a producción — de punta a punta.',
     'hero.cta.studies': 'Ver Casos de Estudio',
@@ -19,10 +19,10 @@ const es = {
     'methodology.label': 'Mi Propuesta de Valor',
     'methodology.title.1': 'Analizo primero.',
     'methodology.title.2': 'Construyo después.',
-    'methodology.subtitle': 'Como Analista en Sistemas, mi objetivo es entender qué necesita el usuario antes de abrir el editor. Construyo software Full-Stack funcional, mantenible y orientado a aportar valor real.',
+    'methodology.subtitle': 'Como Analista de Sistemas, mi objetivo es entender qué necesita el usuario antes de abrir el editor. Construyo software Full-Stack funcional, mantenible y orientado a aportar valor real.',
     'methodology.card1.title': '1. Entender antes de codear',
     'methodology.card1.desc': 'Me enfoco en levantar los requerimientos, modelar la base de datos y definir la estructura inicial para evitar cuellos de botella a futuro.',
-    'methodology.card1.label': 'Bases de datos sólidas',
+    'methodology.card1.label': 'Arquitectura sin deuda técnica',
     'methodology.card2.title': '2. Desarrollo Full-Stack',
     'methodology.card2.desc': 'Me ocupo del frontend y del backend. No porque quiera hacer todo, sino porque entender las dos capas me permite tomar mejores decisiones en cada una.',
     'methodology.card2.label': 'Dominio de Front y Back',
@@ -40,9 +40,9 @@ const es = {
     'contact.cv': 'Descargar CV',
     'contact.cv.modal.title': 'Selecciona una versión',
     'contact.cv.es': 'CV en Español',
-    'contact.cv.es.sub': 'Descargar versión nativa',
+    'contact.cv.es.sub': 'Descargar versión en español',
     'contact.cv.en': 'Resume in English',
-    'contact.cv.en.sub': 'Download technical version',
+    'contact.cv.en.sub': 'Download English version',
 
     // Contact Modal
     'contact.modal.title': 'Contacto',
@@ -63,7 +63,7 @@ const es = {
     'contact.modal.mailto': 'Abrir correo',
 
     // Footer
-    'footer.subtitle': 'Analista en Sistemas & Desarrollador Full Stack.',
+    'footer.subtitle': 'Analista de Sistemas & Desarrollador Full Stack.',
     'footer.nav.title': 'Navegación',
     'footer.nav.home': 'Inicio',
     'footer.nav.proposal': 'Propuesta',

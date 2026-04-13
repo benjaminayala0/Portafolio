@@ -1,12 +1,12 @@
 import React from 'react';
-import { Smartphone, Server, Database, Cloud, MessageSquare, Shield, ArrowRight } from 'lucide-react';
+import { LayoutDashboard, Workflow, HardDrive, ImagePlus, MessageSquare, ShieldCheck, ArrowRight } from 'lucide-react';
 
 const FLOW_NODES = [
     {
         id: 'app',
         label: 'App Mobile',
         tech: 'React Native · Expo Router',
-        Icon: Smartphone,
+        Icon: LayoutDashboard,
         color: 'text-fuchsia-400',
         borderColor: 'border-fuchsia-500/30',
         glowColor: 'from-fuchsia-500/15',
@@ -16,7 +16,7 @@ const FLOW_NODES = [
         id: 'api',
         label: 'API Gateway',
         tech: 'Node.js · Express (MVC)',
-        Icon: Server,
+        Icon: Workflow,
         color: 'text-blue-400',
         borderColor: 'border-blue-500/30',
         glowColor: 'from-blue-500/15',
@@ -26,7 +26,7 @@ const FLOW_NODES = [
         id: 'data',
         label: 'Persistencia',
         tech: 'PostgreSQL · Sequelize',
-        Icon: Database,
+        Icon: HardDrive,
         color: 'text-amber-400',
         borderColor: 'border-amber-500/30',
         glowColor: 'from-amber-500/15',
@@ -35,9 +35,9 @@ const FLOW_NODES = [
 ];
 
 const SERVICES = [
-    { label: 'Cloudinary', desc: 'Fotos Antes/Después', Icon: Cloud, color: 'text-violet-400' },
+    { label: 'Cloudinary', desc: 'Fotos Antes/Después', Icon: ImagePlus, color: 'text-violet-400' },
     { label: 'WhatsApp', desc: 'Recordatorios 1-tap', Icon: MessageSquare, color: 'text-emerald-400' },
-    { label: 'Helmet + Bcrypt', desc: 'Seguridad Endpoint', Icon: Shield, color: 'text-rose-400' },
+    { label: 'Helmet + Bcrypt', desc: 'Seguridad Endpoint', Icon: ShieldCheck, color: 'text-rose-400' },
 ];
 
 import { useTranslation } from '@/core/hooks/useTranslation';
@@ -60,9 +60,9 @@ const VisuBookEcosystem = () => {
                                     <node.Icon className={node.color} size={20} />
                                 </div>
                                 <div className="flex-1 min-w-0">
-                                    <div className="flex items-baseline gap-2 mb-1">
+                                    <div className="flex flex-col sm:flex-row sm:items-baseline gap-0.5 sm:gap-2 mb-1.5">
                                         <span className="text-text-primary font-medium text-sm">{t(node.label)}</span>
-                                        <span className="text-text-secondary/60 font-mono text-[10px] truncate">{node.tech}</span>
+                                        <span className="text-text-secondary/60 font-mono text-[10px] sm:truncate">{node.tech}</span>
                                     </div>
                                     <div className="flex flex-wrap gap-1.5">
                                         {node.features.map(f => (

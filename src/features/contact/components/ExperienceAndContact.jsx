@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Github, Linkedin, Download, Briefcase, GraduationCap, Code2, Layers, Server, Database, FileText, Globe } from 'lucide-react';
+import { Mail, Github, Linkedin, Download, TrendingUp, GraduationCap, Code2, Layers, Server, Database, FileText } from 'lucide-react';
 import Modal from '@/core/ui/Modal';
 import ContactModal from '@/core/ui/ContactModal';
 import TechIcon from '@/core/ui/TechIcon';
@@ -25,7 +25,7 @@ const ExperienceAndContact = () => {
                     {/* Experience Timeline */}
                     <div>
                         <h3 className="text-xl font-mono text-text-primary flex items-center gap-3 mb-8">
-                            <Briefcase className="text-primary" size={24} />
+                            <TrendingUp className="text-primary" size={24} />
                             <span>{t('experience.title')}</span>
                         </h3>
 
@@ -187,7 +187,7 @@ const ExperienceAndContact = () => {
                     >
                         <div className="flex items-center gap-3">
                             <div className="p-2 bg-[#8b5cf6]/10 rounded-lg text-[#8b5cf6]">
-                                <Globe size={20} />
+                                <FileText size={20} />
                             </div>
                             <div className="text-left">
                                 <h4 className="font-medium text-text-primary group-hover:text-[#8b5cf6] transition-colors">{t('contact.cv.en')}</h4>

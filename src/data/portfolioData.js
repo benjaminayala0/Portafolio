@@ -1,4 +1,4 @@
-import { Code2, Server, Database, Layers, ExternalLink, Smartphone, Lock, Webhook, CloudLightning, Fingerprint, CreditCard, UserCheck, CalendarClock, Gem, BellRing, Camera, Activity, Timer, Rocket } from 'lucide-react';
+import { Code2, Server, ShoppingBag, Monitor, Database, Plug, Layers, ExternalLink, Smartphone, Lock, Webhook, CloudLightning, Fingerprint, CreditCard, UserCheck, CalendarClock, Gem, BellRing, Camera, Activity, Timer, Rocket } from 'lucide-react';
 
 export const EXPERIENCE = [
     {
@@ -94,7 +94,7 @@ export const TECH_STACK = [
     {
         id: 'core-skills',
         title: 'Integraciones & Herramientas',
-        Icon: Layers,
+        Icon: Plug,
         themeClasses: {
             text: 'text-fuchsia-500',
             borderGroupHover: 'hover:border-fuchsia-500/30',
@@ -102,7 +102,7 @@ export const TECH_STACK = [
         },
         items: [
             { name: 'Mercado Pago', slug: 'mercadopago' },
-            { name: 'Google OAuth', slug: 'googleoauth' },
+            { name: 'Google OAuth', slug: 'google' },
             { name: 'JWT Auth', slug: 'jsonwebtokens' },
             { name: 'Postman', slug: 'postman' },
             { name: 'Git/GitHub', slug: 'github' },
@@ -119,11 +119,11 @@ export const CASE_STUDIES = [
         title: 'Mate Único:',
         subtitle: 'E-commerce Headless',
         theme: {
-            primary: 'text-amber-500',
-            gradient: 'from-amber-500 to-orange-500',
-            border: 'border-amber-500',
-            bgHover: 'group-hover:bg-amber-500/5',
-            hoverBorder: 'hover:border-amber-500/50'
+            primary: 'text-[#D4A373]',
+            gradient: 'from-[#D4A373] to-[#D4A373]',
+            border: 'border-[#D4A373]',
+            bgHover: 'group-hover:bg-[#D4A373]/5',
+            hoverBorder: 'hover:border-[#D4A373]/50'
         },
         tags: 'Retail & Fintech',
         context: [
@@ -170,10 +170,10 @@ export const CASE_STUDIES = [
         topologyNoteIcon: Timer,
         topologyNoteColor: 'text-amber-500',
         bannerText: '¿Necesitás una solución E-commerce / Headless similar para tu empresa?',
-        bannerIcon: Rocket,
-        bannerBg: 'bg-primary/10',
-        bannerIconColor: 'text-primary',
-        bannerButtonHover: 'hover:text-primary',
+        bannerIcon: ShoppingBag,
+        bannerBg: 'bg-[#D4A373]/10',
+        bannerIconColor: 'text-[#D4A373]',
+        bannerButtonHover: 'hover:text-[#D4A373]',
         reverseDesktop: false,
         layers: [
             {
@@ -182,7 +182,7 @@ export const CASE_STUDIES = [
                 tech: 'React + Vite SPA',
                 sideLabel: 'Rendering',
                 sideValue: 'CSR (SPA)',
-                Icon: Smartphone,
+                Icon: Monitor,
                 iconColor: 'text-cyan-400',
                 blurColor: 'from-blue-500/10 to-teal-400/10',
                 hoverBorder: 'hover:border-primary/50'
@@ -217,11 +217,11 @@ export const CASE_STUDIES = [
         title: 'VisuBook:',
         subtitle: 'SaaS Ecosystem',
         theme: {
-            primary: 'text-emerald-400',
-            gradient: 'from-emerald-400 to-teal-500',
-            border: 'border-emerald-400',
-            bgHover: 'group-hover:bg-emerald-400/5',
-            hoverBorder: 'hover:border-emerald-400/50'
+            primary: 'text-fuchsia-500',
+            gradient: 'from-fuchsia-500 to-fuchsia-500',
+            border: 'border-fuchsia-500',
+            bgHover: 'group-hover:bg-fuchsia-500/5',
+            hoverBorder: 'hover:border-fuchsia-500/50'
         },
         tags: 'Mobile SaaS • Booking & CRM',
         context: [
@@ -243,14 +243,14 @@ export const CASE_STUDIES = [
                 title: 'Monetización & Feature Gating',
                 description: 'Arquitectura escalable de límites (Freemium) controlada por middlewares en Node.js e interceptores inteligentes en el frontend para disparar flujos de Upgrading.',
                 Icon: Gem,
-                iconColor: 'text-amber-400'
+                iconColor: 'text-emerald-400'
             },
             {
                 id: 'expo-notifications',
                 title: 'Reducción de Absentismo (No-Shows)',
                 description: 'Automatización de alertas push locales enviadas 15 minutos antes de cada cita con Quick Actions integradas para confirmación vía WhatsApp.',
                 Icon: BellRing,
-                iconColor: 'text-emerald-400'
+                iconColor: 'text-amber-400'
             },
             {
                 id: 'visual-tracking',

@@ -28,6 +28,7 @@ const StudiesSection = () => {
     const flippingRef = useRef({});
     const timersRef = useRef({});
     const pausedRef = useRef({});
+    const isVisibleRef = useRef({});
 
     const study1 = useScrollReveal();
     const study2 = useScrollReveal();
@@ -56,7 +57,30 @@ const StudiesSection = () => {
         }, FLIP_HALF_MS);
     }, [activeViews]);
 
-    // Auto-advance with preview-aware timing
+    // Track which cards are physically in the viewport to prevent off-screen layout shifts
+    useEffect(() => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const id = entry.target.id.replace('study-wrapper-', '');
+                isVisibleRef.current[id] = entry.isIntersecting;
+            });
+        }, { threshold: 0.1 });
+
+        // Small timeout to ensure DOM nodes are painted before observing
+        const timeoutId = setTimeout(() => {
+            CASE_STUDIES.forEach(study => {
+                const el = document.getElementById(`study-wrapper-${study.id}`);
+                if (el) observer.observe(el);
+            });
+        }, 100);
+
+        return () => {
+            clearTimeout(timeoutId);
+            observer.disconnect();
+        };
+    }, []);
+
+    // Auto-advance with preview-aware timing and viewport awareness
     useEffect(() => {
         Object.values(timersRef.current).forEach(clearInterval);
         timersRef.current = {};
@@ -73,6 +97,7 @@ const StudiesSection = () => {
             const delay = isPreview ? AUTO_ADVANCE_MS * screenshotCount : AUTO_ADVANCE_MS;
 
             timersRef.current[study.id] = setInterval(() => {
+                if (isVisibleRef.current[study.id] === false) return;
                 if (pausedRef.current[study.id]) return;
                 if (flippingRef.current[study.id]) return;
 
@@ -128,7 +153,7 @@ const StudiesSection = () => {
                 const flipState = flipStates[study.id];
 
                 return (
-                    <div key={study.id} ref={sectionReveal.ref} className={sectionReveal.revealClass}>
+                    <div id={`study-wrapper-${study.id}`} key={study.id} ref={sectionReveal.ref} className={sectionReveal.revealClass}>
                         <div className={`mb-16 ${study.reverseDesktop ? 'text-right flex flex-col items-end' : ''}`}>
                             <h2 className={`text-sm font-mono ${study.theme.primary} flex items-center ${study.reverseDesktop ? 'justify-end' : ''} gap-2 mb-2`}>
                                 {!study.reverseDesktop && <span className="w-8 h-px bg-[currentColor]"></span>}
@@ -143,7 +168,7 @@ const StudiesSection = () => {
                         <div className="p-[1px] rounded-2xl bg-gradient-to-b from-text-secondary/20 to-transparent group relative">
                             <div className={`absolute inset-0 bg-gradient-to-${study.reverseDesktop ? 'bl' : 'br'} from-${study.theme.border}/10 via-transparent to-transparent opacity-0 ${study.theme.bgHover} transition-opacity duration-700 rounded-2xl pointer-events-none`} />
 
-                            <div className="relative bg-surface-lighter/80 backdrop-blur-xl border border-text-secondary/10 rounded-2xl p-5 sm:p-8 md:p-12 overflow-hidden shadow-2xl">
+                            <div className="relative bg-surface-lighter/80 backdrop-blur-md sm:backdrop-blur-xl border border-text-secondary/10 rounded-2xl p-5 sm:p-8 md:p-12 overflow-hidden shadow-2xl">
 
                                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
 
@@ -203,11 +228,10 @@ const StudiesSection = () => {
                                                         <button
                                                             key={view.id}
                                                             onClick={() => handleTabClick(study.id, view.id)}
-                                                            className={`flex-1 flex items-center justify-center gap-1.5 px-2 sm:px-4 py-2 rounded-lg text-xs font-medium transition-all duration-300 ${
-                                                                isActive
+                                                            className={`flex-1 flex items-center justify-center gap-1.5 px-2 sm:px-4 py-2 rounded-lg text-xs font-medium transition-all duration-300 ${isActive
                                                                     ? `bg-surface-lighter border border-text-secondary/15 ${study.theme.primary} shadow-sm`
                                                                     : 'text-text-secondary hover:text-text-primary border border-transparent'
-                                                            }`}
+                                                                }`}
                                                         >
                                                             {Icon && <Icon size={13} />}
                                                             <span className="hidden sm:inline">{t(view.label)}</span>
@@ -217,11 +241,10 @@ const StudiesSection = () => {
                                             </div>
                                         )}
 
-                                        <div style={{ perspective: '1200px' }} className="min-h-[480px] sm:min-h-[500px] lg:min-h-[550px] w-full flex flex-col justify-center">
-                                            <div className={`transform-gpu ${
-                                                flipState === 'out' ? 'study-flip-out' :
-                                                flipState === 'in' ? 'study-flip-in' : ''
-                                            }`}>
+                                        <div style={{ perspective: '1200px' }} className="min-h-[480px] sm:min-h-[500px] lg:min-h-[520px] w-full flex flex-col justify-center">
+                                            <div className={`transform-gpu ${flipState === 'out' ? 'study-flip-out' :
+                                                    flipState === 'in' ? 'study-flip-in' : ''
+                                                }`}>
 
                                                 {currentView === 'architecture' && (
                                                     <>
@@ -269,15 +292,11 @@ const StudiesSection = () => {
                                                 )}
 
                                                 {currentView === 'flow' && (
-                                                    <div className="w-full rounded-xl overflow-hidden border border-text-secondary/10 bg-surface shadow-2xl">
-                                                        <CheckoutFlowDiagram />
-                                                    </div>
+                                                    <CheckoutFlowDiagram />
                                                 )}
 
                                                 {currentView === 'ecosystem' && (
-                                                    <div className="w-full rounded-xl overflow-hidden border border-text-secondary/10 bg-surface p-5 shadow-2xl">
-                                                        <VisuBookEcosystem />
-                                                    </div>
+                                                    <VisuBookEcosystem />
                                                 )}
 
                                                 {currentView === 'preview' && (
@@ -305,7 +324,7 @@ const StudiesSection = () => {
 
                                 <div className="mt-12 pt-8 border-t border-text-secondary/10 flex flex-col sm:flex-row items-center justify-between gap-6 bg-surface/30 p-6 rounded-xl border border-text-secondary/5">
                                     <div className="flex items-center gap-4">
-                                        <div className={`p-3 ${study.bannerBg} rounded-full ${study.bannerIconColor} hidden sm:block`}>
+                                        <div className={`p-2 sm:p-3 ${study.bannerBg} rounded-full ${study.bannerIconColor}`}>
                                             <study.bannerIcon size={20} />
                                         </div>
                                         <p className="text-text-primary font-medium text-sm md:text-base">
