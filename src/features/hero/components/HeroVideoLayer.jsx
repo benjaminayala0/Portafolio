@@ -39,6 +39,7 @@ export const HeroVideoLayer = ({
                     <video
                         ref={videoRef}
                         src={videoSrc}
+                        poster={videoSrc.replace('.mp4', '-poster.jpg')}
                         preload="auto"
                         muted
                         playsInline

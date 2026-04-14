@@ -12,7 +12,7 @@ const VideoOutro = () => {
                 if (entry.isIntersecting && !hasPlayed) {
                     setHasPlayed(true);
                     if (videoRef.current) {
-                        videoRef.current.play().catch(e => console.log('Autoplay prevented:', e));
+                        videoRef.current.play().catch(() => {});
                     }
                 }
             },
@@ -34,6 +34,7 @@ const VideoOutro = () => {
             <video
                 ref={videoRef}
                 src="/outro.mp4"
+                poster="/outro-poster.jpg"
                 className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-[2000ms] ${hasPlayed ? 'opacity-80' : 'opacity-0'}`}
                 style={{ objectPosition: 'center 40%' }}
                 muted

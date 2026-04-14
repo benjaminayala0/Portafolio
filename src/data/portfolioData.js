@@ -261,8 +261,8 @@ export const CASE_STUDIES = [
             }
         ],
         ctaPrimary: {
-            text: 'Solicitar Demo Privada',
-            link: '#'
+            text: 'Ver Plataforma Live',
+            link: 'https://visubook-web.vercel.app/'
         },
         views: [
             { id: 'architecture', label: 'Arquitectura' },

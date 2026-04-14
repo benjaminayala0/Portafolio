@@ -179,6 +179,8 @@ const StudiesSection = () => {
                                             </div>
 
                                             {study.context.map((text, i) => (
+                                                // TODO: [Tech Debt] Conscious use of dangerouslySetInnerHTML to render basic HTML tags (<strong>, etc.) from static translation files.
+                                                // Safe here because translations are tightly controlled, but should be replaced with MDX or a parser if we ever accept dynamic input.
                                                 <p key={i} className={`text-${i === 0 ? 'lg' : 'md'} text-text-secondary leading-relaxed mb-${i === 0 ? '6' : '4'} ${i === 0 ? 'font-sans' : ''}`} dangerouslySetInnerHTML={{ __html: t(text) }} />
                                             ))}
 

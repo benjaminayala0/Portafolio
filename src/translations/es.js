@@ -41,7 +41,7 @@ const es = {
     'contact.cv.modal.title': 'Selecciona una versión',
     'contact.cv.es': 'CV en Español',
     'contact.cv.es.sub': 'Descargar versión en español',
-    'contact.cv.en': 'Resume in English',
+    'contact.cv.en': 'CV in English',
     'contact.cv.en.sub': 'Download English version',
 
     // Contact Modal
