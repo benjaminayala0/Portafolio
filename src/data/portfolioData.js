@@ -261,7 +261,7 @@ export const CASE_STUDIES = [
             }
         ],
         ctaPrimary: {
-            text: 'Ver Plataforma Live',
+            text: 'Ver Landing Page',
             link: 'https://visubook-web.vercel.app/'
         },
         views: [

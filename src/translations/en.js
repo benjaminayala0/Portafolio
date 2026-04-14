@@ -122,6 +122,7 @@ const en = {
     'Auth Delegada & Caché Inteligente': 'Delegated Auth & Smart Caching',
     'Login con Google OAuth 2.0 y sesiones stateless vía JWT. El catálogo se sirve desde caché en memoria (Node-Cache) para acelerar la carga sin consultas repetidas a la base de datos.': 'Stateless sessions via Google OAuth 2.0 and JWT. The catalog is heavily cached in memory (Node-Cache) to speed up response times without overwhelming the database with repeated reads.',
     'Ver Plataforma Live': 'View Live Platform',
+    'Ver Landing Page': 'View Landing Page',
     'Arquitectura': 'Architecture',
     'Flujo de Pago': 'Payment Flow',
     'Vista Previa': 'Preview',

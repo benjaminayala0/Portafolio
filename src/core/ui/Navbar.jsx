@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from '@/core/hooks/useTranslation';
+import { useLanguage } from '@/core/context/LanguageContext';
 
 const Navbar = () => {
     const { t } = useTranslation();
+    const { lang, setLang } = useLanguage();
     const [isVisible, setIsVisible] = useState(false);
     const [activeSection, setActiveSection] = useState('');
     const isClickingRef = React.useRef(false);
@@ -90,7 +92,7 @@ const Navbar = () => {
                             key={labelKey}
                             href={href}
                             onClick={() => handleNavClick(sectionId)}
-                            className={`px-3 py-1.5 rounded-full text-xs font-mono transition-all duration-200 whitespace-nowrap ${isActive
+                            className={`px-2.5 sm:px-3 py-1.5 rounded-full text-[10px] sm:text-xs font-mono transition-all duration-200 whitespace-nowrap ${isActive
                                 ? 'bg-primary/15 text-primary'
                                 : 'text-text-secondary hover:text-text-primary hover:bg-white/5'
                                 }`}
@@ -99,6 +101,27 @@ const Navbar = () => {
                         </a>
                     );
                 })}
+
+                <div className="w-px h-4 bg-text-secondary/20 mx-0.5 sm:mx-1" />
+
+                <div className="flex items-center p-0.5 rounded-full bg-black/40 shadow-inner border border-white/5">
+                    <button
+                        title={lang === 'en' ? 'Cambiar a Español' : undefined}
+                        onClick={() => setLang('es')}
+                        className={`flex items-center justify-center w-6 sm:w-7 h-5 sm:h-6 rounded-full text-[9px] sm:text-[10px] font-mono font-medium transition-all duration-300 ${lang === 'es' ? 'bg-white/15 text-white shadow-sm' : 'text-text-secondary/50 hover:text-white hover:bg-white/5'}`}
+                        aria-label="Español"
+                    >
+                        ES
+                    </button>
+                    <button
+                        title={lang === 'es' ? 'Switch to English' : undefined}
+                        onClick={() => setLang('en')}
+                        className={`flex items-center justify-center w-6 sm:w-7 h-5 sm:h-6 rounded-full text-[9px] sm:text-[10px] font-mono font-medium transition-all duration-300 ${lang === 'en' ? 'bg-white/15 text-white shadow-sm' : 'text-text-secondary/50 hover:text-white hover:bg-white/5'}`}
+                        aria-label="English"
+                    >
+                        EN
+                    </button>
+                </div>
 
                 <div className="w-px h-4 bg-text-secondary/20 ml-1 hidden sm:block" />
 

@@ -16,7 +16,7 @@ const Methodology = () => {
             <div ref={header.ref} className={`text-center mb-20 ${header.revealClass}`}>
                 <h2 className="text-sm font-mono text-primary flex items-center justify-center gap-2 mb-3">
                     <span className="w-8 h-px bg-primary"></span>
-                    Mi Propuesta de Valor
+                    {t('methodology.label')}
                     <span className="w-8 h-px bg-primary"></span>
                 </h2>
                 <h3 className="text-3xl md:text-5xl font-bold text-text-primary mb-6 tracking-tight">

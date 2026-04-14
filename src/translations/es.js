@@ -122,6 +122,7 @@ const es = {
     'Auth Delegada & Caché Inteligente': 'Auth Delegada & Caché Inteligente',
     'Login con Google OAuth 2.0 y sesiones stateless vía JWT. El catálogo se sirve desde caché en memoria (Node-Cache) para acelerar la carga sin consultas repetidas a la base de datos.': 'Login con Google OAuth 2.0 y sesiones stateless vía JWT. El catálogo se sirve desde caché en memoria (Node-Cache) para acelerar la carga sin consultas repetidas a la base de datos.',
     'Ver Plataforma Live': 'Ver Plataforma Live',
+    'Ver Landing Page': 'Ver Landing Page',
     'Arquitectura': 'Arquitectura',
     'Flujo de Pago': 'Flujo de Pago',
     'Vista Previa': 'Vista Previa',
