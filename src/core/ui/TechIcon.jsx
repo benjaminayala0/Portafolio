@@ -6,11 +6,11 @@ const TechIcon = ({ slug, name }) => {
     const getIconUrl = (s) => `https://cdn.simpleicons.org/${s}`;
 
     return (
-        <span className="inline-flex items-center justify-center w-5 h-5 mx-1 transition-transform duration-300 group-hover/item:scale-110">
-            <img 
+        <span className="w-0 opacity-0 overflow-hidden group-hover/item:w-5 group-hover/item:mr-2 group-hover/item:opacity-100 transition-all duration-300 flex items-center justify-center">
+            <img
                 src={getIconUrl(slug)}
                 alt={`${name} logo`}
-                className="w-[18px] h-[18px] object-contain grayscale opacity-60 group-hover/item:grayscale-0 group-hover/item:opacity-100 transition-all duration-300 invert brightness-200 group-hover/item:invert-0 group-hover/item:brightness-100"
+                className="w-5 h-5 object-contain"
                 loading="lazy"
                 onError={(e) => {
                     e.target.style.display = 'none';
