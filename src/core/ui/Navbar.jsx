@@ -34,23 +34,47 @@ const Navbar = () => {
     }, []);
 
     useEffect(() => {
-        const sections = ['methodology', 'studies', 'experience-contact', 'contact'];
-        const observers = sections.map((id) => {
-            const el = document.getElementById(id);
-            if (!el) return null;
-            const obs = new IntersectionObserver(
-                ([entry]) => {
-                    if (entry.isIntersecting && !isClickingRef.current) {
-                        setActiveSection(id);
+        const handleScrollSpy = () => {
+            if (isClickingRef.current) return;
+
+            const sections = ['methodology', 'studies', 'experience-contact'];
+            const focalPoint = window.innerHeight * 0.4;
+            let currentActive = '';
+            
+            for (let i = sections.length - 1; i >= 0; i--) {
+                const el = document.getElementById(sections[i]);
+                if (el) {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top <= focalPoint) {
+                        currentActive = sections[i];
+                        break;
                     }
-                },
-                { threshold: 0.08 }
-            );
-            obs.observe(el);
-            return obs;
-        });
-        return () => observers.forEach((obs) => obs?.disconnect());
-    }, []);
+                }
+            }
+
+            if (currentActive !== activeSection) {
+                setActiveSection(currentActive);
+            }
+        };
+
+        // Throttling protection: Ensure the heavy calculation only runs once every 100ms
+        let timeout;
+        const throttledScroll = () => {
+            if (timeout) return;
+            timeout = setTimeout(() => {
+                handleScrollSpy();
+                timeout = null;
+            }, 100);
+        };
+
+        window.addEventListener('scroll', throttledScroll, { passive: true });
+        handleScrollSpy();
+
+        return () => {
+            window.removeEventListener('scroll', throttledScroll);
+            if (timeout) clearTimeout(timeout);
+        };
+    }, [activeSection]);
 
     const scrollToTop = () => {
         isClickingRef.current = true;
