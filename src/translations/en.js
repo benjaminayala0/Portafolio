@@ -169,7 +169,7 @@ const en = {
     'Home — Catálogo de productos': 'Home — Product catalog',
     'Detalle — Mate Torpedo Uruguayo': 'Detail — Uruguayan Torpedo Mate',
     'Carrito — Flujo de compra': 'Cart — Purchase flow',
-    'Demo alojada en infraestructura Free-Tier (Render + Vercel). Incluye health-check automático para mitigar cold-starts.': 'Demo hosted on Free-Tier infrastructure (Render + Vercel). Includes automated health-check to mitigate instance cold-starts.',
+    'La interfaz (Vercel) está online. La API (Render) se encuentra pausada para ahorrar horas del Free-Tier. Si querés probar el flujo completo de pago, mandame un mensaje y la prendo.': 'The UI (Vercel) is currently live. The API (Render) is paused to save Free-Tier hours. If you want to test the full payment flow, send me a message and I will turn it on.',
     '(+) El desacoplamiento entre servicios garantiza que la caída del frontend no interrumpa el procesamiento de webhooks de pago, y que la indisponibilidad temporal del CMS sea mitigada por la capa de caché en memoria.': '(+) Service decoupling ensures that front-end downtime does not interrupt payment webhook processing, and temporary CMS unavailability is gracefully mitigated by the in-memory cache layer.',
     '¿Necesitás una solución E-commerce / Headless similar para tu empresa?': 'Do you need a similar E-commerce / Headless solution for your business?',
     'Capa de Presentación (Edge)': 'Presentation Layer (Edge)',

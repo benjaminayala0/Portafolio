@@ -132,7 +132,7 @@ export const CASE_STUDIES = [
         ],
         notice: {
             icon: Activity,
-            text: 'Demo alojada en infraestructura Free-Tier (Render + Vercel). Incluye health-check automático para mitigar cold-starts.',
+            text: 'La interfaz (Vercel) está online. La API (Render) se encuentra pausada para ahorrar horas del Free-Tier. Si querés probar el flujo completo de pago, mandame un mensaje y la prendo.',
             colorClass: 'text-amber-500'
         },
         integrationsTitle: 'Integraciones Críticas Resolutivas',
