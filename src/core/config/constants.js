@@ -12,6 +12,6 @@ export const SOCIAL_LINKS = {
 };
 
 export const CV_URLS = {
-    es: '/documents/CV_Benjamin_Ayala_ES.pdf',
-    en: '/documents/CV_Benjamin_Ayala_EN.pdf'
+    es: '/documents/CV_Benjamin_Ayala_ES.pdf?v=2',
+    en: '/documents/CV_Benjamin_Ayala_EN.pdf?v=2'
 };

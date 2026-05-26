@@ -3,7 +3,15 @@ import React from 'react';
 const TechIcon = ({ slug, name }) => {
     if (!slug) return null;
 
-    const getIconUrl = (s) => `https://cdn.simpleicons.org/${s}`;
+    const getIconUrl = (s) => {
+        // Slugs that are black or very dark in Simple Icons and would be invisible on a dark background
+        const darkSlugs = ['render', 'vercel', 'express', 'json', 'expo', 'jsonwebtokens', 'github', 'fly.io', 'flydotio'];
+        const normalized = s.toLowerCase();
+        if (darkSlugs.includes(normalized)) {
+            return `https://cdn.simpleicons.org/${s}/white`;
+        }
+        return `https://cdn.simpleicons.org/${s}`;
+    };
 
     return (
         <span className="w-0 opacity-0 overflow-hidden group-hover/item:w-5 group-hover/item:mr-2 group-hover/item:opacity-100 transition-all duration-300 flex items-center justify-center">
