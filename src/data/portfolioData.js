@@ -226,7 +226,7 @@ export const CASE_STUDIES = [
         tags: 'Mobile SaaS • Booking & CRM',
         context: [
             'Nacido de una necesidad real para digitalizar procesos analógicos, <strong>VisuBook</strong> evolucionó de una herramienta de gestión familiar a una solución SaaS integral para profesionales de la estética y salud.',
-            'El sistema no solo gestiona citas; orquesto una arquitectura capaz de manejar seguimientos técnicos visuales complejos, reducir el ausentismo mediante <strong>automatizaciones inteligentes</strong> y gestionar límites de uso dinámicos (Feature Gating).'
+            'El sistema no solo gestiona citas; orquesté una arquitectura capaz de manejar seguimientos técnicos visuales complejos, reducir el ausentismo mediante <strong>automatizaciones inteligentes</strong> y gestionar límites de uso dinámicos (Feature Gating).'
         ],
         notice: null,
         integrationsTitle: 'Desafíos Técnicos & Soluciones de Impacto',
@@ -248,7 +248,7 @@ export const CASE_STUDIES = [
             {
                 id: 'expo-notifications',
                 title: 'Reducción de Absentismo (No-Shows)',
-                description: 'Automatización de alertas push locales enviadas 15 minutos antes de cada cita con Quick Actions integradas para confirmación vía WhatsApp.',
+                description: 'Orquestación de notificaciones push programadas y alertas server-side con Quick Actions integradas para confirmación directa y reducción de inasistencias.',
                 Icon: BellRing,
                 iconColor: 'text-amber-400'
             },
