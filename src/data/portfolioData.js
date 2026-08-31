@@ -258,7 +258,7 @@ export const CASE_STUDIES = [
         ],
         ctaPrimary: {
             text: 'Ver Landing Page',
-            link: 'https://visubook.cloud/'
+            link: 'https://visubook-web.vercel.app/'
         },
         views: [
             { id: 'architecture', label: 'Arquitectura' },
