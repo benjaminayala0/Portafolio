@@ -19,7 +19,6 @@ const TechIcon = ({ slug, name }) => {
                 src={getIconUrl(slug)}
                 alt={`${name} logo`}
                 className="w-5 h-5 object-contain"
-                loading="lazy"
                 onError={(e) => {
                     e.target.style.display = 'none';
                 }}

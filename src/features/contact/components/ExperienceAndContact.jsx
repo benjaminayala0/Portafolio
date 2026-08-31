@@ -47,19 +47,19 @@ const ExperienceAndContact = () => {
                     {/* Education Timeline */}
                     <div>
                         <h3 className="text-xl font-mono text-text-primary flex items-center gap-3 mb-8">
-                            <GraduationCap className="text-[#8b5cf6]" size={24} />
+                            <GraduationCap className="text-text-primary" size={24} />
                             <span>{t('education.title')}</span>
                         </h3>
 
                         <div className="relative pl-8 border-l border-text-secondary/20 space-y-10">
                             {EDUCATION.map((edu) => (
                                 <div key={edu.id} className="relative">
-                                    <div className={`absolute -left-[41px] bg-surface p-1 rounded-full border ${edu.isCurrent ? 'border-[#8b5cf6]' : 'border-text-secondary/50'}`}>
-                                        <div className={`w-2 h-2 rounded-full ${edu.isCurrent ? 'bg-[#8b5cf6] animate-pulse' : 'bg-text-secondary/50'}`} />
+                                    <div className={`absolute -left-[41px] bg-surface p-1 rounded-full border ${edu.isCurrent ? 'border-text-primary' : 'border-text-secondary/50'}`}>
+                                        <div className={`w-2 h-2 rounded-full ${edu.isCurrent ? 'bg-text-primary animate-pulse' : 'bg-text-secondary/50'}`} />
                                     </div>
                                     <div className="text-sm font-mono text-text-secondary mb-1">{t(edu.period)}</div>
                                     <h4 className={`text-lg font-bold text-text-primary ${!edu.isCurrent ? 'text-opacity-80' : ''}`}>{t(edu.title)}</h4>
-                                    <div className={`${edu.isCurrent ? 'text-[#8b5cf6]' : 'text-text-secondary'} text-sm font-medium`}>{t(edu.institution)}</div>
+                                    <div className={`${edu.isCurrent ? 'text-text-primary' : 'text-text-secondary'} text-sm font-medium`}>{t(edu.institution)}</div>
                                 </div>
                             ))}
                         </div>
@@ -80,20 +80,38 @@ const ExperienceAndContact = () => {
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             {TECH_STACK.map((stack) => {
                                 const Icon = stack.Icon;
+
+                                // Group items into pairs of 2 items per row max
+                                const itemRows = [];
+                                for (let i = 0; i < stack.items.length; i += 2) {
+                                    itemRows.push(stack.items.slice(i, i + 2));
+                                }
+
                                 return (
                                     <div key={stack.id} className={`glass-panel p-5 rounded-xl border border-text-secondary/10 transition-colors group ${stack.themeClasses.borderGroupHover}`}>
-                                        <div className="flex items-center gap-3 mb-3 text-text-primary">
-                                            <Icon className={stack.themeClasses.text} size={18} />
+                                        <div className="flex items-center gap-3 mb-3.5 text-text-primary">
+                                            <Icon className="text-text-primary opacity-90" size={18} />
                                             <h4 className="font-medium text-sm">{stack.title}</h4>
                                         </div>
-                                        <div className="text-sm text-text-secondary font-mono leading-relaxed flex flex-wrap gap-x-2 gap-y-2 items-center">
-                                            {stack.items.map((item, index) => (
-                                                <div key={index} className="flex items-center group/item cursor-default">
-                                                    <TechIcon slug={item.slug} name={item.name} />
-                                                    <span className={`transition-colors ${stack.themeClasses.textHover} group-hover/item:text-text-primary`}>
-                                                        {item.name}
-                                                    </span>
-                                                    {index < stack.items.length - 1 && <span className="text-text-secondary/30 ml-2">·</span>}
+                                        <div className="text-xs sm:text-sm text-text-secondary font-mono leading-relaxed space-y-2">
+                                            {itemRows.map((rowItems, rowIndex) => (
+                                                <div key={rowIndex} className="flex items-center gap-x-2">
+                                                    {rowItems.map((item, colIndex) => {
+                                                        const globalIndex = rowIndex * 2 + colIndex;
+                                                        const isLastInCard = globalIndex === stack.items.length - 1;
+                                                        const isLastInRow = colIndex === rowItems.length - 1;
+                                                        return (
+                                                            <div key={item.name} className="inline-flex items-center whitespace-nowrap group/item cursor-default">
+                                                                <TechIcon slug={item.slug} name={item.name} />
+                                                                <span className={`transition-colors ${stack.themeClasses.textHover} group-hover/item:text-text-primary`}>
+                                                                    {item.name}
+                                                                </span>
+                                                                {!isLastInCard && !isLastInRow && (
+                                                                    <span className="text-text-secondary/30 ml-2.5 mr-0.5 select-none">·</span>
+                                                                )}
+                                                            </div>
+                                                        );
+                                                    })}
                                                 </div>
                                             ))}
                                         </div>

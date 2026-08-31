@@ -155,10 +155,8 @@ const StudiesSection = () => {
                 return (
                     <div id={`study-wrapper-${study.id}`} key={study.id} ref={sectionReveal.ref} className={sectionReveal.revealClass}>
                         <div className={`mb-16 ${study.reverseDesktop ? 'text-right flex flex-col items-end' : ''}`}>
-                            <h2 className={`text-sm font-mono ${study.theme.primary} flex items-center ${study.reverseDesktop ? 'justify-end' : ''} gap-2 mb-2`}>
-                                {!study.reverseDesktop && <span className="w-8 h-px bg-[currentColor]"></span>}
+                            <h2 className={`text-sm font-mono ${study.theme.primary} mb-2`}>
                                 {t(study.type)}
-                                {study.reverseDesktop && <span className="w-8 h-px bg-[currentColor]"></span>}
                             </h2>
                             <h3 className="text-3xl md:text-5xl font-bold text-text-primary tracking-tight">
                                 {t(study.title)} <span className={`text-transparent bg-clip-text bg-gradient-to-r ${study.theme.gradient}`}>{t(study.subtitle)}</span>
@@ -185,9 +183,9 @@ const StudiesSection = () => {
                                             ))}
 
                                             {study.notice && (
-                                                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded bg-surface/80 border border-text-secondary/10 text-xs font-mono text-text-secondary mb-8">
-                                                    <study.notice.icon size={18} className={`shrink-0 ${study.notice.colorClass}`} />
-                                                    <span>{t(study.notice.text)}</span>
+                                                <div className="flex items-start gap-2.5 text-xs font-mono text-white font-medium mb-6">
+                                                    <study.notice.icon size={16} className={`shrink-0 mt-0.5 ${study.notice.colorClass}`} />
+                                                    <span className="leading-relaxed text-white font-medium">{t(study.notice.text)}</span>
                                                 </div>
                                             )}
 
@@ -195,13 +193,11 @@ const StudiesSection = () => {
                                                 <h4 className="text-sm font-mono text-text-primary uppercase tracking-wider mb-2">{t(study.integrationsTitle)}</h4>
 
                                                 {study.integrations.map((integration) => (
-                                                    <div key={integration.id} className="flex items-start gap-4">
-                                                        <div className="p-2 rounded bg-surface border border-text-secondary/10 shrink-0">
-                                                            <integration.Icon size={18} className={integration.iconColor} />
-                                                        </div>
+                                                    <div key={integration.id} className="flex items-start gap-3 group/item">
+                                                        <integration.Icon size={18} className="text-text-primary shrink-0 mt-0.5 opacity-90 group-hover/item:opacity-100 group-hover/item:scale-110 transition-all" />
                                                         <div>
                                                             <h5 className="text-text-primary font-medium text-sm">{t(integration.title)}</h5>
-                                                            <p className="text-sm text-text-secondary mt-1">{t(integration.description)}</p>
+                                                            <p className="text-xs sm:text-sm text-text-secondary leading-relaxed mt-1">{t(integration.description)}</p>
                                                         </div>
                                                     </div>
                                                 ))}
@@ -258,15 +254,12 @@ const StudiesSection = () => {
                                                             {study.layers.map((layer, i) => (
                                                                 <React.Fragment key={layer.id}>
                                                                     <div className="relative group/layer">
-                                                                        <div className={`absolute inset-0 bg-gradient-to-r ${layer.blurColor} rounded-xl blur-xl transition-all duration-300 group-hover/layer:blur-2xl opacity-50`} />
-                                                                        <div className={`glass-panel p-5 rounded-xl border border-text-secondary/10 relative z-10 flex items-center justify-between transition-colors ${layer.hoverBorder}`}>
-                                                                            <div className="flex items-center gap-4">
-                                                                                <div className="p-3 bg-surface rounded-lg">
-                                                                                    <layer.Icon className={layer.iconColor} />
-                                                                                </div>
+                                                                        <div className={`glass-panel p-4 sm:p-5 rounded-xl border border-text-secondary/10 relative z-10 flex items-center justify-between transition-colors ${layer.hoverBorder}`}>
+                                                                            <div className="flex items-center gap-3.5">
+                                                                                <layer.Icon className={`${layer.iconColor} shrink-0`} size={20} />
                                                                                 <div>
-                                                                                    <div className="font-mono text-xs text-text-secondary mb-1">{t(layer.title)}</div>
-                                                                                    <div className="text-text-primary font-medium">{t(layer.tech)}</div>
+                                                                                    <div className="font-mono text-xs text-text-secondary mb-0.5">{t(layer.title)}</div>
+                                                                                    <div className="text-text-primary font-medium text-sm sm:text-base">{t(layer.tech)}</div>
                                                                                 </div>
                                                                             </div>
                                                                             <div className="text-right hidden sm:block">
@@ -284,9 +277,11 @@ const StudiesSection = () => {
                                                             ))}
                                                         </div>
 
-                                                        <div className="mt-8 p-4 rounded-lg bg-surface/50 border border-text-secondary/10 flex items-start gap-3">
-                                                            <study.topologyNoteIcon className={`${study.topologyNoteColor} shrink-0 mt-0.5`} size={16} />
-                                                            <p className="text-xs text-text-secondary leading-relaxed font-mono">
+                                                        <div className="mt-6 flex items-start gap-2.5">
+                                                            {study.topologyNoteIcon && (
+                                                                <study.topologyNoteIcon className={`${study.topologyNoteColor} shrink-0 mt-0.5`} size={15} />
+                                                            )}
+                                                            <p className="text-xs text-text-primary/90 leading-relaxed font-mono">
                                                                 {t(study.topologyNote)}
                                                             </p>
                                                         </div>
@@ -302,10 +297,18 @@ const StudiesSection = () => {
                                                 )}
 
                                                 {currentView === 'preview' && (
-                                                    <div className="w-full rounded-xl overflow-hidden border border-text-secondary/10 bg-surface flex flex-col shadow-2xl">
+                                                    <div className={`w-full rounded-xl overflow-hidden flex flex-col ${
+                                                        study.id === 'visubook'
+                                                            ? 'bg-transparent border-0 shadow-none'
+                                                            : 'border border-text-secondary/10 bg-surface shadow-2xl'
+                                                    }`}>
                                                         <div className="flex-1 relative flex justify-center">
                                                             {study.screenshots ? (
-                                                                <StorePreviewCarousel screenshots={study.screenshots} isMobile={study.id === 'visubook'} />
+                                                                <StorePreviewCarousel
+                                                                    screenshots={study.screenshots}
+                                                                    isMobile={study.id === 'visubook'}
+                                                                    activeDotColor={study.id === 'mate-unico' ? 'bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.5)]' : 'bg-violet-400 shadow-[0_0_10px_rgba(167,139,250,0.5)]'}
+                                                                />
                                                             ) : study.previewImage ? (
                                                                 <img
                                                                     src={study.previewImage.url}
@@ -324,18 +327,13 @@ const StudiesSection = () => {
 
                                 </div>
 
-                                <div className="mt-12 pt-8 border-t border-text-secondary/10 flex flex-col sm:flex-row items-center justify-between gap-6 bg-surface/30 p-6 rounded-xl border border-text-secondary/5">
-                                    <div className="flex items-center gap-4">
-                                        <div className={`p-2 sm:p-3 ${study.bannerBg} rounded-full ${study.bannerIconColor}`}>
-                                            <study.bannerIcon size={20} />
-                                        </div>
-                                        <p className="text-text-primary font-medium text-sm md:text-base">
-                                            {t(study.bannerText)}
-                                        </p>
-                                    </div>
+                                <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+                                    <p className="text-text-primary font-medium text-sm md:text-base">
+                                        {t(study.bannerText)}
+                                    </p>
                                     <button
                                         onClick={() => setIsContactModalOpen(true)}
-                                        className={`w-full sm:w-auto shrink-0 inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg glass-button font-medium text-text-primary text-sm transition-colors border border-text-secondary/20 ${study.bannerButtonHover}`}
+                                        className="w-full sm:w-auto shrink-0 inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg glass-button font-medium text-text-primary text-sm transition-colors border border-text-secondary/20 hover:border-primary/50"
                                     >
                                         <Mail size={16} /> {t('studies.talk')}
                                     </button>

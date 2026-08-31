@@ -95,12 +95,11 @@ const CheckoutFlowDiagram = () => {
                         <React.Fragment key={i}>
                             {/* Phase Label */}
                             {step.phase && (
-                                <div className={`flex items-center gap-2 ${i > 0 ? 'pt-2 pb-0.5' : 'pb-0.5'}`}>
+                                <div className={`flex items-center gap-2 ${i > 0 ? 'pt-3 pb-1' : 'pb-1'}`}>
                                     <div className={`w-[31px] h-px ${step.phaseColor.line} shrink-0`} />
                                     <span className={`text-[10px] font-mono uppercase tracking-[0.15em] ${step.phaseColor.text} whitespace-nowrap`}>
                                         {t(step.phase)}
                                     </span>
-                                    <div className={`flex-1 h-px ${step.phaseColor.line}`} />
                                 </div>
                             )}
 

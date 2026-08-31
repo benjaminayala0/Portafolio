@@ -6,7 +6,7 @@ export const EXPERIENCE = [
         period: 'Dic. 2025 - Presente',
         title: 'Desarrollador Full Stack Mobile',
         subtitle: 'Freelance (Plataforma SaaS Booking & CRM)',
-        description: 'Arquitecté y desarrollé una <strong>plataforma móvil SaaS de Booking & CRM</strong> multiplataforma con <strong>React Native (Expo)</strong> y <strong>TypeScript</strong>. Diseñé una <strong>API RESTful</strong> con Node.js/Express conectada a un esquema normalizado en <strong>PostgreSQL (Sequelize)</strong>, implementando <strong>JWT con Refresh Tokens</strong>, Feature Gating (Freemium) y pagos con <strong>Mercado Pago</strong>.',
+        description: 'Lideré el diseño y desarrollo de un <strong>ecosistema SaaS multiplataforma (iOS/Android & Web)</strong> para gestión de turnos y CRM. Implementé <strong>arquitectura multi-tenant</strong> en Node.js/PostgreSQL y procesamiento de pagos con <strong>Mercado Pago</strong> en producción.',
         isCurrent: true
     },
     {
@@ -67,7 +67,6 @@ export const TECH_STACK = [
             { name: 'Node.js', slug: 'nodedotjs' },
             { name: 'Express', slug: 'express' },
             { name: 'TypeScript', slug: 'typescript' },
-            { name: 'REST APIs', slug: 'json' },
             { name: 'Strapi', slug: 'strapi' },
             { name: 'Sequelize', slug: 'sequelize' }
         ]
@@ -83,12 +82,12 @@ export const TECH_STACK = [
         },
         items: [
             { name: 'PostgreSQL', slug: 'postgresql' },
-            { name: 'Cloudinary', slug: 'cloudinary' },
             { name: 'Supabase', slug: 'supabase' },
+            { name: 'Cloudinary', slug: 'cloudinary' },
             { name: 'Docker', slug: 'docker' },
+            { name: 'Fly.io', slug: 'fly.io' },
             { name: 'Render', slug: 'render' },
-            { name: 'Vercel', slug: 'vercel' },
-            { name: 'Fly.io', slug: 'fly.io' }
+            { name: 'Vercel', slug: 'vercel' }
         ]
     },
     {
@@ -96,17 +95,14 @@ export const TECH_STACK = [
         title: 'Integraciones & Herramientas',
         Icon: Plug,
         themeClasses: {
-            text: 'text-fuchsia-500',
-            borderGroupHover: 'hover:border-fuchsia-500/30',
-            textHover: 'hover:text-fuchsia-400'
+            text: 'text-violet-500',
+            borderGroupHover: 'hover:border-violet-500/30',
+            textHover: 'hover:text-violet-400'
         },
         items: [
             { name: 'Mercado Pago', slug: 'mercadopago' },
-            { name: 'Google OAuth', slug: 'google' },
-            { name: 'JWT Auth', slug: 'jsonwebtokens' },
             { name: 'Postman', slug: 'postman' },
-            { name: 'Git/GitHub', slug: 'github' },
-            { name: 'Arquitectura UML', slug: 'diagramsdotnet' },
+            { name: 'Git / GitHub', slug: 'github' },
             { name: 'Figma', slug: 'figma' }
         ]
     }
@@ -262,7 +258,7 @@ export const CASE_STUDIES = [
         ],
         ctaPrimary: {
             text: 'Ver Landing Page',
-            link: 'https://visubook-web.vercel.app/'
+            link: 'https://visubook.cloud/'
         },
         views: [
             { id: 'architecture', label: 'Arquitectura' },
@@ -270,37 +266,39 @@ export const CASE_STUDIES = [
             { id: 'preview', label: 'Producto' },
         ],
         screenshots: [
-            { src: '/screenshots/visubook/dashboard.jpg', alt: 'Dashboard — Resumen del día y acciones rápidas' },
-            { src: '/screenshots/visubook/clientes.jpg', alt: 'CRM — Gestión de clientes con acciones integradas' },
-            { src: '/screenshots/visubook/historial.jpg', alt: 'Historial — Ficha técnica visual (Antes/Después)' },
+            { src: '/screenshots/visubook/dashboard.png', alt: 'Dashboard — Resumen del día y próximo turno' },
+            { src: '/screenshots/visubook/agenda.png', alt: 'Agenda — Gestión de turnos en vivo y WhatsApp' },
+            { src: '/screenshots/visubook/historial.png', alt: 'Historial — Ficha técnica con fotos Antes y Después' },
+            { src: '/screenshots/visubook/metricas.png', alt: 'Métricas — Panel de facturación y proyección mensual' },
+            { src: '/screenshots/visubook/portal.png', alt: 'Portal Web — Reservas online 24/7 sin intermediarios' },
         ],
         topologyNote: '*La arquitectura desacoplada y el sistema de Gating permiten transicionar de un modelo B2C a B2B sin reescribir el núcleo del sistema.',
         topologyNoteIcon: CloudLightning,
-        topologyNoteColor: 'text-fuchsia-500',
+        topologyNoteColor: 'text-violet-400',
         bannerText: '¿Buscás transformar un proceso manual en un producto SaaS escalable?',
-        bannerIcon: Rocket,
-        bannerBg: 'bg-fuchsia-500/10',
-        bannerIconColor: 'text-fuchsia-400',
-        bannerButtonHover: 'hover:text-fuchsia-400',
+        bannerIcon: null,
+        bannerBg: 'bg-violet-500/10',
+        bannerIconColor: 'text-violet-400',
+        bannerButtonHover: 'hover:text-violet-400',
         reverseDesktop: true,
         layers: [
             {
                 id: 'layer1',
-                title: 'Capa de Presentación (App)',
-                tech: 'React Native + Expo (Router)',
+                title: 'Capa de Presentación (App & Web)',
+                tech: 'React Native (Expo) + React / Vite',
                 sideLabel: 'Ecosistema',
-                sideValue: 'iOS / Android',
+                sideValue: 'Android & Web Portal',
                 Icon: Smartphone,
-                iconColor: 'text-fuchsia-400',
-                blurColor: 'from-fuchsia-500/10 to-pink-500/10',
-                hoverBorder: 'hover:border-fuchsia-500/50'
+                iconColor: 'text-violet-400',
+                blurColor: 'from-violet-500/10 to-indigo-500/10',
+                hoverBorder: 'hover:border-violet-500/50'
             },
             {
                 id: 'layer2',
                 title: 'Lógica & Seguridad (Core)',
-                tech: 'Node.js + Express (MVC)',
-                sideLabel: 'Auth',
-                sideValue: 'JWT / Refresh Tokens',
+                tech: 'Node.js + Express (Docker)',
+                sideLabel: 'Auth & Cloud',
+                sideValue: 'JWT • Fly.io',
                 Icon: Server,
                 iconColor: 'text-blue-500',
                 blurColor: 'from-blue-600/10 to-indigo-500/10',
@@ -308,14 +306,14 @@ export const CASE_STUDIES = [
             },
             {
                 id: 'layer3',
-                title: 'Persistencia & Multimedia',
-                tech: 'PostgreSQL + Cloudinary',
-                sideLabel: 'ORM',
-                sideValue: 'Sequelize',
+                title: 'Persistencia & Base de Datos',
+                tech: 'PostgreSQL (Supabase) + Cloudinary',
+                sideLabel: 'Base de Datos',
+                sideValue: 'PostgreSQL Relacional',
                 Icon: Database,
-                iconColor: 'text-amber-500',
-                blurColor: 'from-amber-500/10 to-orange-400/10',
-                hoverBorder: 'hover:border-amber-500/50'
+                iconColor: 'text-emerald-500',
+                blurColor: 'from-emerald-500/10 to-teal-400/10',
+                hoverBorder: 'hover:border-emerald-500/50'
             }
         ]
     }

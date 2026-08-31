@@ -86,7 +86,7 @@ const en = {
     // Experience
     'Desarrollador Full Stack Mobile': 'Full Stack Mobile Developer',
     'Freelance (Plataforma SaaS Booking & CRM)': 'Freelance (SaaS Booking & CRM Platform)',
-    'Arquitecté y desarrollé una <strong>plataforma móvil SaaS de Booking & CRM</strong> multiplataforma con <strong>React Native (Expo)</strong> y <strong>TypeScript</strong>. Diseñé una <strong>API RESTful</strong> con Node.js/Express conectada a un esquema normalizado en <strong>PostgreSQL (Sequelize)</strong>, implementando <strong>JWT con Refresh Tokens</strong>, Feature Gating (Freemium) y pagos con <strong>Mercado Pago</strong>.': 'Architected and developed a cross-platform <strong>mobile SaaS Booking & CRM</strong> using <strong>React Native (Expo)</strong> and <strong>TypeScript</strong>. Designed a <strong>RESTful API</strong> with Node.js/Express connected to a normalized schema in <strong>PostgreSQL (Sequelize)</strong>, implementing <strong>JWT with Refresh Tokens</strong>, Feature Gating (Freemium tier), and payment processing via <strong>Mercado Pago</strong>.',
+    'Lideré el diseño y desarrollo de un <strong>ecosistema SaaS multiplataforma (iOS/Android & Web)</strong> para gestión de turnos y CRM. Implementé <strong>arquitectura multi-tenant</strong> en Node.js/PostgreSQL y procesamiento de pagos con <strong>Mercado Pago</strong> en producción.': 'Led the end-to-end design and development of a <strong>cross-platform SaaS ecosystem (iOS/Android & Web)</strong> for booking & CRM. Implemented <strong>multi-tenant architecture</strong> in Node.js/PostgreSQL and payment processing with <strong>Mercado Pago</strong> in production.',
     'Dic. 2025 - Presente': 'Dec. 2025 - Present',
 
     'Desarrollador Full Stack': 'Full Stack Developer',
@@ -161,9 +161,11 @@ const en = {
     'Orden Confirmada': 'Order Confirmed',
 
     // Captions VisuBook
-    'Dashboard — Resumen del día y acciones rápidas': 'Dashboard — Daily summary and quick actions',
-    'CRM — Gestión de clientes con acciones integradas': 'CRM — Client management with integrated actions',
-    'Historial — Ficha técnica visual (Antes/Después)': 'History — Visual technical record (Before/After)',
+    'Dashboard — Resumen del día y próximo turno': 'Dashboard — Daily summary and upcoming booking',
+    'Agenda — Gestión de turnos en vivo y WhatsApp': 'Schedule — Live booking management & WhatsApp',
+    'Historial — Ficha técnica con fotos Antes y Después': 'History — Technical records with Before/After photos',
+    'Métricas — Panel de facturación y proyección mensual': 'Metrics — Revenue panel & monthly projection',
+    'Portal Web — Reservas online 24/7 sin intermediarios': 'Web Portal — 24/7 self-service online booking',
 
     // Captions Mate Unico
     'Home — Catálogo de productos': 'Home — Product catalog',
