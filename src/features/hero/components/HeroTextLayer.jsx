@@ -82,17 +82,6 @@ export const HeroTextLayer = ({ textVisible, textOpacity, isInteractive }) => {
                         {t('hero.cta.contact')}
                     </a>
                 </motion.div>
-
-                <motion.div variants={itemVariants} className="mt-4 pt-3 md:mt-10 md:pt-6 border-t border-text-secondary/10 flex flex-wrap justify-center md:justify-start gap-2 md:gap-3">
-                    {['React', 'Node.js', 'PostgreSQL', 'TypeScript'].map((tech) => (
-                        <span
-                            key={tech}
-                            className="px-2.5 py-1 rounded-full border border-text-secondary/15 text-text-secondary font-mono text-[10px] md:text-xs tracking-wide bg-surface-lighter/30"
-                        >
-                            {tech}
-                        </span>
-                    ))}
-                </motion.div>
             </motion.div>
         </motion.div>
     );

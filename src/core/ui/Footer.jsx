@@ -61,7 +61,7 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+                <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
                     <div className="text-text-secondary/60 font-mono text-xs flex flex-col sm:flex-row items-center gap-2">
                         <span>© {currentYear} Benjamín Ayala.</span>
                         <span className="hidden sm:inline">|</span>

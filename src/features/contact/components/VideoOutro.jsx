@@ -12,7 +12,7 @@ const VideoOutro = () => {
                 if (entry.isIntersecting && !hasPlayed) {
                     setHasPlayed(true);
                     if (videoRef.current) {
-                        videoRef.current.play().catch(() => {});
+                        videoRef.current.play().catch(() => { });
                     }
                 }
             },
@@ -56,7 +56,7 @@ const VideoOutro = () => {
                     — Benjamín
                 </p>
             </div>
-            
+
             {/* Cinematic subtle glow at the bottom */}
             <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
         </section>

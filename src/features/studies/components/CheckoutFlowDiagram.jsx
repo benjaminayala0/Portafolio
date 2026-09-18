@@ -107,13 +107,13 @@ const CheckoutFlowDiagram = () => {
                             <div className="relative flex items-center gap-3 group/step py-1">
                                 {/* Timeline Dot */}
                                 <div className="relative z-10 shrink-0 w-[31px] flex items-center justify-center">
-                                    <div className={`w-2.5 h-2.5 rounded-full ${step.colors.dot} ${step.colors.shadow} shadow-lg ring-[3px] ring-surface transition-all duration-300 group-hover/step:scale-125`} />
+                                    <div className={`w-2.5 h-2.5 rounded-full ${step.colors.dot} ring-[3px] ring-surface transition-all duration-300 group-hover/step:scale-125`} />
                                 </div>
 
                                 {/* Step Card */}
                                 <div className={`flex-1 flex items-center gap-3 p-2 sm:p-2.5 rounded-lg bg-surface/50 border ${step.colors.border} hover:bg-surface/80 transition-all duration-300 cursor-default`}>
-                                    <div className={`p-1.5 rounded-md bg-surface-lighter/80 shrink-0 ${step.colors.icon}`}>
-                                        <step.icon size={14} strokeWidth={2} />
+                                    <div className={`shrink-0 ${step.colors.icon} flex items-center justify-center`}>
+                                        <step.icon size={16} strokeWidth={2} />
                                     </div>
 
                                     <div className="flex-1 min-w-0">

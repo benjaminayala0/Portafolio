@@ -2,7 +2,7 @@ const es = {
     // Hero
     'hero.title.line1': 'Analista de Sistemas',
     'hero.title.line2': ' & Desarrollador Full Stack.',
-    'hero.subtitle': 'Mi trabajo no es solo escribir código, sino desarmar problemas complejos. Entiendo el negocio, diseño la solución y la llevo a producción — de punta a punta.',
+    'hero.subtitle': 'Resuelvo problemas de negocio a través de software: diseño la arquitectura, desarrollo la solución y la llevo a producción — de punta a punta.',
     'hero.cta.studies': 'Ver Casos de Estudio',
     'hero.cta.contact': 'Contactar ahora',
     'hero.scroll': 'SCROLL',
