@@ -2,7 +2,7 @@
 
 🌐 **Live URL:** [https://benjaminayala.dev/](https://benjaminayala.dev/)
 
-![Benjamín Ayala Portfolio](./public/og-image.jpg)
+![Benjamín Ayala Portfolio](./public/og-image.png)
 
 Hi! I'm Benjamín, a Systems Analyst and Full Stack Developer. Welcome to the code behind my interactive portfolio.
 
